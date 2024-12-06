@@ -1,0 +1,14 @@
+{
+  "home": {
+    "title": "战略配备英雄",
+    "subtitle": "输入任意战略配备代码即可开始！"
+  },
+  "round": {
+    "title": "准备",
+    "subtitle": "回合"
+  },
+  "game": {
+    "score": "得分",
+    "round": "回合"
+  }
+}

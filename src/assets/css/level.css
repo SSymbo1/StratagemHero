@@ -1,0 +1,116 @@
+.game-container {
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    display: flex;
+    flex-direction: column;
+}
+
+.game-layer {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.round-layer {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    color: white;
+}
+
+.top-line {
+    border-bottom: 5px solid white;
+    height: 100px
+}
+
+.bottom-line {
+    border-top: 5px solid white;
+    height: 100px
+}
+
+.round-layer-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+}
+
+.round-layer-label-title {
+    font-size: 25px;
+}
+
+.round-layer-label-index {
+    font-size: 25px;
+    color: gold;
+}
+
+.round-layer-title {
+    font-weight: bold;
+    font-size: 50px
+}
+
+.game-main {
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50vw;
+}
+
+.game-side {
+    padding-top: 30px;
+    width: 25vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.game-side-number {
+    font-size: 40px;
+    color: gold;
+}
+
+.game-side-label {
+    font-size: 20px;
+    color: white;
+}
+
+.stratagems {
+    width: 100%;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+}
+
+.stratagems-pointer {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+}
+
+.stratagems-label {
+    background: gold;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height: 50px;
+    font-size: 30px;
+}
+
+.arrow-layer {
+    width: 600px;
+    height: 100px;
+}
+
