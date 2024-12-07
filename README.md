@@ -59,7 +59,7 @@ Vite+ts+Vue3项目，绝地遣兵2战略配备英雄小游戏
 
 ### 本地部署游玩
 
-#### 1.在下载该项目 release ,并下载 Nginx
+#### 1.在下载该项目 Releases ,并下载 Nginx
 
 - Nginx官网：
 - https://nginx.org/en/download.html
@@ -75,7 +75,7 @@ Vite+ts+Vue3项目，绝地遣兵2战略配备英雄小游戏
 #### 3.启动 Nginx
 
 - 回到 Nginx 文件夹，双击 **nginx.exe** 启动，在任务管理器中搜索 nginx 如果有相应进程则代表启动成功，如果要关闭则右键结束进程
-- 在浏览器中输入 **localhost** 即可访问游戏
+- 在浏览器中输入 **localhost:8081** 即可访问游戏
 
 ### 其他
 
