@@ -56,7 +56,7 @@
 }
 
 .game-main {
-    gap: 10px;
+    gap: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -83,6 +83,7 @@
 }
 
 .stratagems {
+    gap: 15px;
     width: 100%;
     height: 250px;
     display: flex;
@@ -94,7 +95,11 @@
     width: 100%;
     height: 200px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    gap: 0;
+    margin: 0;
+    padding: 0;
 }
 
 .stratagems-label {
@@ -110,7 +115,45 @@
 }
 
 .arrow-layer {
-    width: 600px;
-    height: 100px;
+    width: 100%;
+    height: 150px;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.round-result {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.round-result-container{
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 50px;
+}
+
+.result-item-label {
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.result-score-label {
+    color: gold;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.round-result-layer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 500px;
 }
 

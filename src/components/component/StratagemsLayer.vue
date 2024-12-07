@@ -1,23 +1,50 @@
 <script setup lang="ts">
 import {Stratagem} from '@/assets/ts/random_stratagems.ts'
-import {Ref, ref} from "vue";
+import {computed, Ref, ref, watch} from "vue";
 
 const props = defineProps({
   stratagems: {
-    type: Array,
+    type: Array<Stratagem>,
     default: () => []
   }
 })
-const emit = defineEmits(['clearUp'])
+const emit = defineEmits(['clearUp', 'nowStratagem'])
 
 const stratagems: Ref<Array<Stratagem>> = ref(props.stratagems)
+const showLabel = computed(() => stratagems.value.slice(0, 4))
 
+const removeFirstStratagem = () => {
+  stratagems.value.shift()
+  if (stratagems.value.length === 0) {
+    emit('clearUp')
+  }
+}
+
+watch(showLabel, (newValue) => {
+  if (newValue.length > 0) {
+    emit('nowStratagem', newValue[0])
+  } else {
+    emit('clearUp')
+  }
+})
+
+defineExpose({
+  removeFirstStratagem
+})
 </script>
 
 <template>
-  <div v-for="arg in stratagems" :key="arg.index"></div>
+  <div class="stratagems-container" v-for="(obj,index) in showLabel" :key="index">
+    <div class="stratagems-label" :class="{'yellow-border': index === 0}">
+      <img :src="obj.icon" alt=""/>
+    </div>
+  </div>
 </template>
 
 <style scoped>
+@import "@/assets/css/stratagems_layer.css";
 
+.yellow-border {
+  border: 5px solid yellow;
+}
 </style>

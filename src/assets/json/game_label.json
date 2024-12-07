@@ -10,5 +10,41 @@
   "game": {
     "score": "得分",
     "round": "回合"
-  }
+  },
+  "roundLabel": [
+    {
+      "label": "本轮加分:",
+      "score": 0
+    },
+    {
+      "label": "时间加分:",
+      "score": 0
+    },
+    {
+      "label": "完美加分:",
+      "score": 0
+    },
+    {
+      "label": "总计:",
+      "score": 0
+    }
+  ],
+  "rankLabel": [
+    {
+      "label": "历史最高分数",
+      "score": 0
+    },
+    {
+      "label": "历史最高回合",
+      "score": 0
+    },
+    {
+      "label": "本轮分数",
+      "score": 0
+    },
+    {
+      "label": "本轮持续回合",
+      "score": 0
+    }
+  ]
 }

@@ -60,14 +60,18 @@ const startCountdown = () => {
 const addTime = () => {
   if (remainingTime.value + props.perPlus >= props.time) {
     remainingTime.value = props.time
-  }else {
+  } else {
     remainingTime.value += props.perPlus
   }
 }
 
+const getRemainTime = () => {
+  return remainingTime.value
+}
+
 // 初始化时开始倒计时
 onMounted(() => {
-  startCountdown();
+  startCountdown()
 })
 
 // 组件卸载时清除定时器
@@ -76,7 +80,8 @@ onBeforeUnmount(() => {
 })
 
 defineExpose({
-  addTime
+  addTime,
+  getRemainTime
 })
 </script>
 
