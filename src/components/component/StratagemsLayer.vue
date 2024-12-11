@@ -6,6 +6,10 @@ const props = defineProps({
   stratagems: {
     type: Array<Stratagem>,
     default: () => []
+  },
+  ampleTime: {
+    type: Boolean,
+    default: true
   }
 })
 const emit = defineEmits(['clearUp', 'nowStratagem'])
@@ -35,7 +39,9 @@ defineExpose({
 
 <template>
   <div class="stratagems-container" v-for="(obj,index) in showLabel" :key="index">
-    <div class="stratagems-label" :class="{'yellow-border': index === 0}">
+    <div
+        class="stratagems-label"
+        :class="{'yellow-border': index == 0 && ampleTime, 'red-border': index == 0 && !ampleTime}">
       <img :src="obj.icon" alt=""/>
     </div>
   </div>
@@ -45,6 +51,10 @@ defineExpose({
 @import "@/assets/css/stratagems_layer.css";
 
 .yellow-border {
-  border: 5px solid yellow;
+  border: 5px solid gold;
+}
+
+.red-border {
+  border: 5px solid red;
 }
 </style>

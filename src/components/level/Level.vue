@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {onMounted, onUnmounted, Ref, ref} from "vue";
+import {computed, CSSProperties, onMounted, onUnmounted, Ref, ref} from "vue";
 import label from '@/assets/json/game_label.json'
 import Timer from "@/components/component/Timer.vue";
 import operation from '@/assets/json/operation.json';
@@ -31,6 +31,8 @@ const roundResult: Ref<Array<RoundResult>> = ref(label.roundLabel)
 const currentIndex: Ref<number> = ref(-1)
 const showIndexes: Ref<Array<number>> = ref([])
 const intervalId: any = ref(null)
+const labelColor: Ref<string> = ref(global.ampleTimeColor)
+const remainTime: Ref<boolean> = ref(true)
 
 interface RoundResult {
   label: string
@@ -133,6 +135,24 @@ const arrowCheckError = () => {
   perfectRound.value = false
 }
 
+const timeNearlyRunOut = () => {
+  labelColor.value = global.dangerTimeColor
+  remainTime.value = false
+  dynamicLabelColor.value
+}
+
+const ampleTime = () => {
+  labelColor.value = global.ampleTimeColor
+  remainTime.value = true
+  dynamicLabelColor.value
+}
+
+const dynamicLabelColor = computed(() => {
+  return {
+    background: labelColor.value
+  } as CSSProperties
+})
+
 onMounted(() => {
   readyForRoundBegin()
 })
@@ -162,12 +182,13 @@ onUnmounted(() => {
           <div class="stratagems-pointer">
             <StratagemsLayer
                 :stratagems="stratagems"
+                :ample-time="remainTime"
                 @clear-up="roundStratagemsRunOut"
                 @now-stratagem="currentStratagem"
                 ref="stratagemsLayer">
             </StratagemsLayer>
           </div>
-          <div class="stratagems-label">
+          <div class="stratagems-label" :style="dynamicLabelColor">
             <span>{{ localStratagemName }}</span>
           </div>
         </div>
@@ -179,7 +200,14 @@ onUnmounted(() => {
               @error="arrowCheckError">
           </ArrowLayer>
         </div>
-        <Timer :time="time" :per-plus="perAddTime" @timeUp="timeUp" ref="timer"></Timer>
+        <Timer
+            :time="time"
+            :per-plus="perAddTime"
+            @timeUp="timeUp"
+            @remain-many="ampleTime"
+            @nearly-over="timeNearlyRunOut"
+            ref="timer">
+        </Timer>
       </div>
       <div class="game-side">
         <div class="game-side-number">{{ score }}</div>

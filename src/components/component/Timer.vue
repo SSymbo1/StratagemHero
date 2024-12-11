@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {computed, CSSProperties, onBeforeUnmount, onMounted, ref} from "vue";
+import global from '@/assets/json/global.json'
 
 const props = defineProps({
   width: {
@@ -15,7 +16,7 @@ const props = defineProps({
     default: 10
   }
 })
-const emit = defineEmits(['timeUp'])
+const emit = defineEmits(['timeUp', 'nearlyOver', 'remainMany'])
 
 const remainingTime = ref(props.time)
 let timer: number | NodeJS.Timeout | null = null
@@ -34,10 +35,18 @@ const progressBarStyle = computed(() => {
 // 更新进度条的样式(动态)
 const progressStyle = computed(() => {
   const percentage = (remainingTime.value / props.time) * 100;
+  let timerColor: string
+  if (percentage <= 35) {
+    emit('nearlyOver')
+    timerColor = global.dangerTimeColor
+  } else {
+    emit('remainMany')
+    timerColor = global.ampleTimeColor
+  }
   return {
     width: `${percentage}%`,
     height: '100%',
-    backgroundColor: 'yellow',
+    backgroundColor: timerColor,
     transition: 'width 0.1s linear'
   } as CSSProperties
 })

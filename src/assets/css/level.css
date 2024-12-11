@@ -130,7 +130,7 @@
     align-items: center;
 }
 
-.round-result-container{
+.round-result-container {
     height: 50vh;
     display: flex;
     flex-direction: column;
