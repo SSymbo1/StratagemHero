@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref, onMounted, onBeforeUnmount, computed, CSSProperties} from "vue";
+import {computed, CSSProperties, onBeforeUnmount, onMounted, ref} from "vue";
 
 const props = defineProps({
   width: {
@@ -65,6 +65,7 @@ const addTime = () => {
   }
 }
 
+// 外部组件可以调用此方法获取剩余时间
 const getRemainTime = () => {
   return remainingTime.value
 }

@@ -14,7 +14,7 @@ Vite+ts+Vue3项目，绝地遣兵2战略配备英雄小游戏
 
 - 1.战备图标和指令：
 
-- https://github.com/WisteFinch/HD2CFS-Database
+- https://github.com/nvigneux/Helldivers-2-Stratagems-icons-svg
 
 ### 初始化
 

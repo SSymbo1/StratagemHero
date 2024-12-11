@@ -54,6 +54,7 @@ const readyForRoundBegin = () => {
   localStratagemName.value = stratagems.value[0].name
   localStratagemArrow.value = stratagems.value[0].operation
   setTimeout(() => {
+    window.addEventListener('keydown', checkInput)
     isRoundStart.value = false
   }, global.ready)
 }
@@ -65,6 +66,7 @@ const timeUp = () => {
 }
 
 const roundStratagemsRunOut = () => {
+  window.removeEventListener('keydown', checkInput)
   let remainTime: number = timer.value.getRemainTime()
   if (round.value <= global.difficultRound && perfectRound.value) {
     perfectScore.value = global.basePerfectScore
@@ -133,7 +135,6 @@ const arrowCheckError = () => {
 
 onMounted(() => {
   readyForRoundBegin()
-  window.addEventListener('keydown', checkInput)
 })
 onUnmounted(() => {
   window.removeEventListener('keydown', checkInput)
