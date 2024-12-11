@@ -47,7 +47,9 @@ const calculateRoundData = () => {
       currentIndex.value++
       showIndexes.value.push(currentIndex.value)
     } else {
+      showIndexes.value.push(-2)
       clearInterval(intervalId.value)
+      window.addEventListener('keydown', checkInput)
     }
   }, global.roundResultLabelWait)
 }
@@ -58,7 +60,6 @@ const checkInput = () => {
 
 onMounted(() => {
   calculateRoundData()
-  window.addEventListener('keydown', checkInput)
 })
 
 onUnmounted(() => {
@@ -80,7 +81,7 @@ onUnmounted(() => {
           <span class="rank-score-label">{{ res.score }}</span>
         </div>
       </div>
-      <div class="press-key">按任意按键返回主页</div>
+      <div class="press-key" v-show="showIndexes.includes(-2)">{{ label.rank.press }}</div>
     </div>
     <div class="bottom-line"></div>
   </div>

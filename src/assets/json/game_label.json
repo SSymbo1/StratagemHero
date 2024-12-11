@@ -11,6 +11,9 @@
     "score": "得分",
     "round": "回合"
   },
+  "rank": {
+    "press": "按任意按键返回主页"
+  },
   "roundLabel": [
     {
       "label": "本轮加分:",

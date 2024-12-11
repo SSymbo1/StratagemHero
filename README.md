@@ -14,7 +14,7 @@ Vite+ts+Vue3项目，绝地遣兵2战略配备英雄小游戏
 
 - 1.战备图标和指令：
 
-- https://github.com/WisteFinch/HD2CFS-Database
+- https://github.com/nvigneux/Helldivers-2-Stratagems-icons-svg
 
 ### 初始化
 
@@ -59,6 +59,8 @@ Vite+ts+Vue3项目，绝地遣兵2战略配备英雄小游戏
 
 ### 本地部署游玩
 
+Releases：https://github.com/SSymbo1/StratagemHero/releases
+
 #### 1.在下载该项目 Releases ,并下载 Nginx
 
 - Nginx官网：
@@ -68,9 +70,9 @@ Vite+ts+Vue3项目，绝地遣兵2战略配备英雄小游戏
 
 #### 2.配置 Nginx
 
-- 将 release 中的 **dist** 文件夹复制到解压后 Nginx 中的 **html** 文件夹中
+- 将 Releases 中的 **dist** 文件夹复制到解压后 Nginx 中的 **html** 文件夹中
 
-- 将 release 中的 **nginx.conf** 文件复制到解压后 Nginx 中的 **conf** 文件夹中替换其中的 **nginx.conf** 文件
+- 将 Releases 中的 **nginx.conf** 文件复制到解压后 Nginx 中的 **conf** 文件夹中替换其中的 **nginx.conf** 文件
 
 #### 3.启动 Nginx
 
