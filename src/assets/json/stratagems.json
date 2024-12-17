@@ -1,0 +1,377 @@
+[
+  {
+    "name": "空爆火箭弹发射器",
+    "icon": "/StratagemHero/icons/stratagems/airburst_rocket_launcher.svg",
+    "operation": [2,1,1,3,4]
+  },
+  {
+    "name": "反器材步枪",
+    "icon": "/StratagemHero/icons/stratagems/anti_materiel_rifle.svg",
+    "operation": [2,3,4,1,2]
+  },
+  {
+    "name": "反步兵地雷",
+    "icon": "/StratagemHero/icons/stratagems/anti_personnel_minefield.svg",
+    "operation": [2,3,1,4]
+  },
+  {
+    "name": "反坦克地雷",
+    "icon": "/StratagemHero/icons/stratagems/anti_tank_mines.svg",
+    "operation": [2,3,1,1]
+  },
+  {
+    "name": "电弧发射器",
+    "icon": "/StratagemHero/icons/stratagems/arc_thrower.svg",
+    "operation": [2,4,2,1,3,3]
+  },
+  {
+    "name": "机炮",
+    "icon": "/StratagemHero/icons/stratagems/autocannon.svg",
+    "operation": [2,3,2,1,1,4]
+  },
+  {
+    "name": "自动哨戒炮",
+    "icon": "/StratagemHero/icons/stratagems/autocannon_sentry.svg",
+    "operation": [2,1,4,1,3,1]
+  },
+  {
+    "name": "防弹护盾背包",
+    "icon": "/StratagemHero/icons/stratagems/ballistic_shield_backpack.svg",
+    "operation": [2,3,2,2,1,3]
+  },
+  {
+    "name": "突击兵",
+    "icon": "/StratagemHero/icons/stratagems/commando.svg",
+    "operation": [2,3,1,2,4]
+  },
+  {
+    "name": "暗流体背包",
+    "icon": "/StratagemHero/icons/stratagems/dark_fluid_vessel.svg",
+    "operation": [1,3,4,2,1,1]
+  },
+  {
+    "name": "暗流体背包",
+    "icon": "/StratagemHero/icons/stratagems/dark_fluid_vessel.svg",
+    "operation": [1,3,4,2,1,1]
+  },
+  {
+    "name": "“飞鹰”110MM火箭巢",
+    "icon": "/StratagemHero/icons/stratagems/eagle_110mm_rocket_pods.svg",
+    "operation": [1,4,1,3]
+  },
+  {
+    "name": "“飞鹰”500KG炸弹",
+    "icon": "/StratagemHero/icons/stratagems/eagle_500kg_bomb.svg",
+    "operation": [1,4,2,2,2]
+  },
+  {
+    "name": "“飞鹰”空袭",
+    "icon": "/StratagemHero/icons/stratagems/eagle_airstrike.svg",
+    "operation": [1,4,2,4]
+  },
+  {
+    "name": "“飞鹰”集束炸弹",
+    "icon": "/StratagemHero/icons/stratagems/eagle_cluster_bomb.svg",
+    "operation": [1,4,2,2,4]
+  },
+  {
+    "name": "“飞鹰”凝固汽油弹空袭",
+    "icon": "/StratagemHero/icons/stratagems/eagle_napalm_airstrike.svg",
+    "operation": [1,4,2,1]
+  },
+  {
+    "name": "重新武装“飞鹰”",
+    "icon": "/StratagemHero/icons/stratagems/eagle_rearm.svg",
+    "operation": [1,1,3,1,4]
+  },
+  {
+    "name": "“飞鹰”烟雾攻击",
+    "icon": "/StratagemHero/icons/stratagems/eagle_smoke_strike.svg",
+    "operation": [1,4,1,2]
+  },
+  {
+    "name": "“飞鹰”机枪扫射",
+    "icon": "/StratagemHero/icons/stratagems/eagle_strafing_run.svg",
+    "operation": [1,4,4]
+  },
+  {
+    "name": "“解放者”外骨骼装甲",
+    "icon": "/StratagemHero/icons/stratagems/emancipator_exosuit.svg",
+    "operation": [3,2,4,1,3,2,1]
+  },
+  {
+    "name": "电磁冲击波迫击哨戒炮",
+    "icon": "/StratagemHero/icons/stratagems/ems_mortar_sentry.svg",
+    "operation": [2,1,4,2,4]
+  },
+  {
+    "name": "消耗性反坦克武器",
+    "icon": "/StratagemHero/icons/stratagems/expendable_anti_tank.svg",
+    "operation": [2,2,3,1,4]
+  },
+  {
+    "name": "火焰喷射器",
+    "icon": "/StratagemHero/icons/stratagems/flamethrower.svg",
+    "operation": [2,3,1,2,1]
+  },
+  {
+    "name": "加特林哨戒炮",
+    "icon": "/StratagemHero/icons/stratagems/gatling_sentry.svg",
+    "operation": [2,1,4,3]
+  },
+  {
+    "name": "榴弹发射器",
+    "icon": "/StratagemHero/icons/stratagems/grenade_launcher.svg",
+    "operation": [2,3,1,3,2]
+  },
+  {
+    "name": "“护卫犬”",
+    "icon": "/StratagemHero/icons/stratagems/guard_dog.svg",
+    "operation": [2,1,3,1,4,2]
+  },
+  {
+    "name": "“护卫犬”腐息",
+    "icon": "/StratagemHero/icons/stratagems/guard_dog_dog_breath.svg",
+    "operation": [2,1,3,1,4,1]
+  },
+  {
+    "name": "“护卫犬”漫游车",
+    "icon": "/StratagemHero/icons/stratagems/guard_dog_rover.svg",
+    "operation": [2,1,3,1,4,4]
+  },
+  {
+    "name": "重机枪",
+    "icon": "/StratagemHero/icons/stratagems/heavy_machine_gun.svg",
+    "operation": [2,3,1,2,2]
+  },
+  {
+    "name": "地狱火炸弹",
+    "icon": "/StratagemHero/icons/stratagems/hellbomb.svg",
+    "operation": [2,1,3,2,1,4,2,1]
+  },
+  {
+    "name": "“虫窝破裂者”钻机",
+    "icon": "/StratagemHero/icons/stratagems/hive_breaker_drill.svg",
+    "operation": [3,1,2,4,2,2]
+  },
+  {
+    "name": "重机枪部署支架",
+    "icon": "/StratagemHero/icons/stratagems/hmg_emplacement.svg",
+    "operation": [2,1,3,4,4,3]
+  },
+  {
+    "name": "燃烧地雷",
+    "icon": "/StratagemHero/icons/stratagems/incendiary_mines.svg",
+    "operation": [2,3,3,2]
+  },
+  {
+    "name": "喷射背包",
+    "icon": "/StratagemHero/icons/stratagems/jump_pack.svg",
+    "operation": [2,1,1,2,1]
+  },
+  {
+    "name": "激光大炮",
+    "icon": "/StratagemHero/icons/stratagems/laser_cannon.svg",
+    "operation": [2,3,2,1,3]
+  },
+  {
+    "name": "机枪",
+    "icon": "/StratagemHero/icons/stratagems/machine_gun.svg",
+    "operation": [2,3,2,1,4]
+  },
+  {
+    "name": "哨戒机枪",
+    "icon": "/StratagemHero/icons/stratagems/machine_gun_sentry.svg",
+    "operation": [2,1,4,4,1]
+  },
+  {
+    "name": "迫击哨戒炮",
+    "icon": "/StratagemHero/icons/stratagems/mortar_sentry.svg",
+    "operation": [2,1,4,4,2]
+  },
+  {
+    "name": "轨道120MM高爆弹火力网",
+    "icon": "/StratagemHero/icons/stratagems/orbital_120mm_he_barrage.svg",
+    "operation": [4,4,2,3,4,2]
+  },
+  {
+    "name": "轨道380MM高爆弹火力网",
+    "icon": "/StratagemHero/icons/stratagems/orbital_380mm_he_barrage.svg",
+    "operation": [4,2,1,1,3,2,2]
+  },
+  {
+    "name": "轨道空爆攻击",
+    "icon": "/StratagemHero/icons/stratagems/orbital_airburst_strike.svg",
+    "operation": [4,4,4]
+  },
+  {
+    "name": "轨道电磁冲击波攻击",
+    "icon": "/StratagemHero/icons/stratagems/orbital_ems_strike.svg",
+    "operation": [4,4,3,2]
+  },
+  {
+    "name": "轨道毒气攻击",
+    "icon": "/StratagemHero/icons/stratagems/orbital_gas_strike.svg",
+    "operation": [4,4,2,4]
+  },
+  {
+    "name": "轨道加特林火力网",
+    "icon": "/StratagemHero/icons/stratagems/orbital_gatling_barrage.svg",
+    "operation": [4,2,3,1,1]
+  },
+  {
+    "name": "轨道照明弹",
+    "icon": "/StratagemHero/icons/stratagems/orbital_illumination_flare.svg",
+    "operation": [4,4,3,3]
+  },
+  {
+    "name": "轨道激光炮",
+    "icon": "/StratagemHero/icons/stratagems/orbital_laser.svg",
+    "operation": [4,2,1,4,2]
+  },
+  {
+    "name": "轨道凝固汽油弹火力网",
+    "icon": "/StratagemHero/icons/stratagems/orbital_napalm_barrage.svg",
+    "operation": [4,4,2,3,4,1]
+  },
+  {
+    "name": "轨道精确攻击",
+    "icon": "/StratagemHero/icons/stratagems/orbital_precision_strike.svg",
+    "operation": [4,4,1]
+  },
+  {
+    "name": "轨道炮攻击",
+    "icon": "/StratagemHero/icons/stratagems/orbital_railcannon_strike.svg",
+    "operation": [4,1,2,2,4]
+  },
+  {
+    "name": "轨道烟雾攻击",
+    "icon": "/StratagemHero/icons/stratagems/orbital_smoke_strike.svg",
+    "operation": [4,4,2,1]
+  },
+  {
+    "name": "轨道游走火力网",
+    "icon": "/StratagemHero/icons/stratagems/orbital_walking_barrage.svg",
+    "operation": [4,2,4,2,4,2]
+  },
+  {
+    "name": "“爱国者”外骨骼装甲",
+    "icon": "/StratagemHero/icons/stratagems/patriot_exosuit.svg",
+    "operation": [3,2,4,1,3,2,2]
+  },
+  {
+    "name": "勘探钻机",
+    "icon": "/StratagemHero/icons/stratagems/prospecting_drill.svg",
+    "operation": [2,2,3,4,2,2]
+  },
+  {
+    "name": "类星体加农炮",
+    "icon": "/StratagemHero/icons/stratagems/quasar_cannon.svg",
+    "operation": [2,2,1,3,4]
+  },
+  {
+    "name": "磁轨炮",
+    "icon": "/StratagemHero/icons/stratagems/railgun.svg",
+    "operation": [2,4,2,1,3,4]
+  },
+  {
+    "name": "无后座力步枪",
+    "icon": "/StratagemHero/icons/stratagems/recoilless_rifle.svg",
+    "operation": [2,3,4,4,3]
+  },
+  {
+    "name": "增援",
+    "icon": "/StratagemHero/icons/stratagems/reinforce.svg",
+    "operation": [1,2,4,3,1]
+  },
+  {
+    "name": "重新补给",
+    "icon": "/StratagemHero/icons/stratagems/resupply.svg",
+    "operation": [2,2,1,4]
+  },
+  {
+    "name": "火箭哨戒炮",
+    "icon": "/StratagemHero/icons/stratagems/rocket_sentry.svg",
+    "operation": [2,1,4,4,3]
+  },
+  {
+    "name": "超级地球武装部队大炮",
+    "icon": "/StratagemHero/icons/stratagems/seaf_artillery.svg",
+    "operation": [4,1,1,2]
+  },
+  {
+    "name": "地震探测仪",
+    "icon": "/StratagemHero/icons/stratagems/seismic_probe.svg",
+    "operation": [1,1,3,4,2,2]
+  },
+  {
+    "name": "防护罩生成器",
+    "icon": "/StratagemHero/icons/stratagems/shield_generator_pack.svg",
+    "operation": [2,1,3,4,3,4]
+  },
+  {
+    "name": "防护罩生成中继器",
+    "icon": "/StratagemHero/icons/stratagems/shield_generator_relay.svg",
+    "operation": [2,2,3,4,3,4]
+  },
+  {
+    "name": "S.O.S.求救信标",
+    "icon": "/StratagemHero/icons/stratagems/sos_beacon.svg",
+    "operation": [1,2,4,1]
+  },
+  {
+    "name": "飞矛",
+    "icon": "/StratagemHero/icons/stratagems/spear.svg",
+    "operation": [2,2,1,2,2]
+  },
+  {
+    "name": "盟友",
+    "icon": "/StratagemHero/icons/stratagems/stalwart.svg",
+    "operation": [2,3,2,1,1,3]
+  },
+  {
+    "name": "灭菌器",
+    "icon": "/StratagemHero/icons/stratagems/sterilizer.svg",
+    "operation": [2,3,1,2,3]
+  },
+  {
+    "name": "超级地球旗帜",
+    "icon": "/StratagemHero/icons/stratagems/super_earth_flag.svg",
+    "operation": [2,1,2,1]
+  },
+  {
+    "name": "补给背包",
+    "icon": "/StratagemHero/icons/stratagems/supply_pack.svg",
+    "operation": [2,3,2,1,1,2]
+  },
+  {
+    "name": "勘探钻机",
+    "icon": "/StratagemHero/icons/stratagems/tectonic_drill.svg",
+    "operation": [2,2,3,4,2,2]
+  },
+  {
+    "name": "特斯拉塔",
+    "icon": "/StratagemHero/icons/stratagems/tesla_tower.svg",
+    "operation": [2,1,4,1,3,4]
+  },
+  {
+    "name": "上传数据",
+    "icon": "/StratagemHero/icons/stratagems/upload_data.svg",
+    "operation": [3,4,1,1,1]
+  },
+  {
+    "name": "反坦克炮台",
+    "icon": "/StratagemHero/icons/stratagems/anti_tank_emplacement.svg",
+    "operation": [2,1,3,4,4,4]
+  },
+  {
+    "name": "定向护盾",
+    "icon": "/StratagemHero/icons/stratagems/directional_shield.svg",
+    "operation": [2,1,3,4,1,1]
+  },
+  {
+    "name": "火焰喷射哨戒炮",
+    "icon": "/StratagemHero/icons/stratagems/flame_sentry.svg",
+    "operation": [2,1,4,2,1,1]
+  }
+]

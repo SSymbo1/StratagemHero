@@ -1,0 +1,72 @@
+.rank-container {
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    display: flex;
+    flex-direction: column;
+}
+
+.rank-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("/public/icons/background/super_earth.webp") no-repeat center;
+    background-size: 40%;
+    background-blend-mode: saturation;
+    opacity: 10%;
+}
+
+.top-line {
+    border-bottom: 5px solid white;
+    height: 100px
+}
+
+.bottom-line {
+    border-top: 5px solid white;
+    height: 100px
+}
+
+.rank-container-layer {
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 50px;
+}
+
+.rank-result-layer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 500px;
+}
+
+.rank-container-padding {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.rank-item-label {
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.rank-score-label {
+    color: gold;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.press-key {
+    color: gold;
+    font-size: 30px;
+    font-weight: bold;
+}

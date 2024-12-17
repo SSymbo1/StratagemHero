@@ -1,0 +1,52 @@
+.home-container {
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    display: flex;
+    flex-direction: column;
+}
+
+.home-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("/public/icons/background/super_earth.webp") no-repeat center;
+    background-size: 40%;
+    background-blend-mode: saturation;
+    opacity: 10%;
+}
+
+.title {
+    color: white;
+    font-weight: bold;
+    font-size: 50px;
+}
+
+.subtitle {
+    color: yellow;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.game-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.top-line {
+    border-bottom: 5px solid white;
+    height: 100px
+}
+
+.bottom-line {
+    border-top: 5px solid white;
+    height: 100px
+}
