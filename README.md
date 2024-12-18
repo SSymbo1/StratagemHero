@@ -77,7 +77,7 @@ Releases：https://github.com/SSymbo1/StratagemHero/releases
 #### 3.启动 Nginx
 
 - 回到 Nginx 文件夹，双击 **nginx.exe** 启动，在任务管理器中搜索 nginx 如果有相应进程则代表启动成功，如果要关闭则右键结束进程
-- 在浏览器中输入 **localhost:8081/StratagemHero** 即可访问游戏
+- 在浏览器中输入 **localhost:8081/StratagemHero/** 即可访问游戏
 
 ### 其他
 
