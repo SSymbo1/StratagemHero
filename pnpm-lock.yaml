@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  disable-devtool:
+    specifier: ^0.3.8
+    version: 0.3.8
   pinia:
     specifier: ^2.1.7
     version: 2.3.0(typescript@5.6.3)(vue@3.5.13)
@@ -14,6 +17,9 @@ dependencies:
   vue:
     specifier: ^3.5.13
     version: 3.5.13(typescript@5.6.3)
+  vue-i18n:
+    specifier: ^10.0.5
+    version: 10.0.5(vue@3.5.13)
   vue-router:
     specifier: '4'
     version: 4.5.0(vue@3.5.13)
@@ -274,6 +280,27 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@intlify/core-base@10.0.5:
+    resolution: {integrity: sha512-F3snDTQs0MdvnnyzTDTVkOYVAZOE/MHwRvF7mn7Jw1yuih4NrFYLNYIymGlLmq4HU2iIdzYsZ7f47bOcwY73XQ==, tarball: https://registry.npmmirror.com/@intlify/core-base/-/core-base-10.0.5.tgz}
+    engines: {node: '>= 16'}
+    dependencies:
+      '@intlify/message-compiler': 10.0.5
+      '@intlify/shared': 10.0.5
+    dev: false
+
+  /@intlify/message-compiler@10.0.5:
+    resolution: {integrity: sha512-6GT1BJ852gZ0gItNZN2krX5QAmea+cmdjMvsWohArAZ3GmHdnNANEcF9JjPXAMRtQ6Ux5E269ymamg/+WU6tQA==, tarball: https://registry.npmmirror.com/@intlify/message-compiler/-/message-compiler-10.0.5.tgz}
+    engines: {node: '>= 16'}
+    dependencies:
+      '@intlify/shared': 10.0.5
+      source-map-js: 1.2.1
+    dev: false
+
+  /@intlify/shared@10.0.5:
+    resolution: {integrity: sha512-bmsP4L2HqBF6i6uaMqJMcFBONVjKt+siGluRq4Ca4C0q7W2eMaVZr8iCgF9dKbcVXutftkC7D6z2SaSMmLiDyA==, tarball: https://registry.npmmirror.com/@intlify/shared/-/shared-10.0.5.tgz}
+    engines: {node: '>= 16'}
+    dev: false
 
   /@jridgewell/sourcemap-codec@1.5.0:
     resolution: {integrity: sha512-gv3ZRaISU3fjPAgNsriBRqGWQL6quFx04YMPW/zD8XMLsU32mhCCbfbO6KZFLjvYpCZ8zyDEgqsgf+PwPaM7GQ==, tarball: https://registry.npmmirror.com/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.5.0.tgz}
@@ -595,6 +622,10 @@ packages:
     resolution: {integrity: sha512-e/1zu3xH5MQryN2zdVaF0OrdNLUbvWxzMbi+iNA6Bky7l1RoP8a2fIbRocyHclXt/arDrrR6lL3TqFD9pMQTsg==, tarball: https://registry.npmmirror.com/de-indent/-/de-indent-1.0.2.tgz}
     dev: true
 
+  /disable-devtool@0.3.8:
+    resolution: {integrity: sha512-spwifiBbcgDTVEdzoWyH3NjZ1he/OgJmUNXvMgEffJ8Fh2B6mEJjCCEV25wlJSyNXEdGyzKFFRXh4kVDRK/wCg==, tarball: https://registry.npmmirror.com/disable-devtool/-/disable-devtool-0.3.8.tgz}
+    dev: false
+
   /entities@4.5.0:
     resolution: {integrity: sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==, tarball: https://registry.npmmirror.com/entities/-/entities-4.5.0.tgz}
     engines: {node: '>=0.12'}
@@ -820,6 +851,18 @@ packages:
       '@vue/composition-api':
         optional: true
     dependencies:
+      vue: 3.5.13(typescript@5.6.3)
+    dev: false
+
+  /vue-i18n@10.0.5(vue@3.5.13):
+    resolution: {integrity: sha512-9/gmDlCblz3i8ypu/afiIc/SUIfTTE1mr0mZhb9pk70xo2csHAM9mp2gdQ3KD2O0AM3Hz/5ypb+FycTj/lHlPQ==, tarball: https://registry.npmmirror.com/vue-i18n/-/vue-i18n-10.0.5.tgz}
+    engines: {node: '>= 16'}
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
+      '@intlify/core-base': 10.0.5
+      '@intlify/shared': 10.0.5
+      '@vue/devtools-api': 6.6.4
       vue: 3.5.13(typescript@5.6.3)
     dev: false
 

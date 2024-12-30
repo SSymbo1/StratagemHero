@@ -6,13 +6,19 @@
 	<strong>战略配备英雄网页版</strong>
 </div>
 
+<div align="center">
+
+[**中文**](./README.md) | [**English**](./README_en.md) 
+
+</div>
+
 ### 介绍
 
-Vite+ts+Vue3项目，绝地遣兵2战略配备英雄小游戏
+Vite + ts + Vue3项目，绝地遣兵2战略配备英雄小游戏
 
 ### 特别感谢
 
-- 1.战备图标和指令：
+- 1.战备图标：
 
 - https://github.com/nvigneux/Helldivers-2-Stratagems-icons-svg
 
@@ -38,18 +44,23 @@ Vite+ts+Vue3项目，绝地遣兵2战略配备英雄小游戏
 
 ```
 ├── public
-│   ├── icons
+│   ├── audio           (音效音频文件)
+│   ├── font            (字体文件)
+│   ├── icons           
+│   │   ├── background  (游戏背景图片)
 │   │   └── stratagems  (战备图标文件)
 ├── src
 │   ├── assets
 │   │   ├── css         (组件css样式表)
-│   │   ├── json        (游戏全局配置)
+│   │   ├── json        (组件依赖json)
 │   │   └── ts          (ts脚本)
 │   ├── components
 │   │   ├── component   (自定义组件)
 │   │   ├── home        (首页组件)
 │   │   └── level       (关卡组件)
-│   ├── router
+│   ├── lang
+│   │   └── locales     (本地化文件)
+│   ├── router          (页面路由)
 │   ├── store
 │   │   └── base        (pinia库)
 │   ├── App.vue

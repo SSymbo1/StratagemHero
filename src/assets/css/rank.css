@@ -1,3 +1,5 @@
+@import "@/assets/css/game_font.css";
+
 .rank-container {
     padding: 0;
     width: 100vw;
@@ -14,10 +16,11 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: url("/public/icons/background/super_earth.webp") no-repeat center;
-    background-size: 40%;
+    background: url("/public/icons/background/super_earth.png") no-repeat center;
+    background-size: 30%;
     background-blend-mode: saturation;
     opacity: 10%;
+    filter: grayscale(100%);
 }
 
 .top-line {
@@ -54,18 +57,21 @@
 }
 
 .rank-item-label {
+    font-family: game;
     color: white;
     font-size: 25px;
     font-weight: bold;
 }
 
 .rank-score-label {
+    font-family: game;
     color: gold;
     font-size: 30px;
     font-weight: bold;
 }
 
 .press-key {
+    font-family: game;
     color: gold;
     font-size: 30px;
     font-weight: bold;

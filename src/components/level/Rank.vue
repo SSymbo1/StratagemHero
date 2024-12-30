@@ -1,15 +1,25 @@
 <script setup lang="ts">
 import {onMounted, onUnmounted, ref, Ref} from "vue";
 import {useScore} from "@/store/base/score.ts";
-import label from '@/assets/json/game_label.json'
-import global from "@/assets/json/global.json";
+import label from "@/assets/json/game_label.json";
 import router from "@/router";
+import {COMPONENT} from "@/assets/ts/global.ts";
 
+/**
+ * @param label 标签
+ * @param score 分数
+ */
 interface RankResult {
   label: string
   score: number
 }
 
+/**
+ * @param historyScore 历史最高分
+ * @param historyRound 历史最高回合
+ * @param lastScore 本轮得分
+ * @param lastRound 本轮回合
+ */
 interface Score {
   historyScore: number,
   historyRound: number,
@@ -28,6 +38,9 @@ const score: Ref<Score> = ref({
   lastRound: 0
 })
 
+/**
+ * 计算本轮游戏数据
+ */
 const calculateRoundData = () => {
   let useScoreStore = useScore()
   score.value = useScoreStore.score
@@ -49,13 +62,16 @@ const calculateRoundData = () => {
     } else {
       showIndexes.value.push(-2)
       clearInterval(intervalId.value)
-      window.addEventListener('keydown', checkInput)
+      window.addEventListener("keydown", checkInput)
     }
-  }, global.roundResultLabelWait)
+  }, COMPONENT.LABEL_SHOW)
 }
 
+/**
+ * 监听键盘事件
+ */
 const checkInput = () => {
-  router.push('/')
+  router.replace("/")
 }
 
 onMounted(() => {
@@ -63,7 +79,7 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  window.removeEventListener('keydown', checkInput)
+  window.removeEventListener("keydown", checkInput)
   clearInterval(intervalId.value)
 })
 </script>
@@ -77,11 +93,11 @@ onUnmounted(() => {
              v-for="(res,index) in rankResult"
              :key="index"
              v-show="showIndexes.includes(index)">
-          <span class="rank-item-label">{{ res.label }}</span>
+          <span class="rank-item-label">{{ $t(`resultLabel.${res.label}`) }}</span>
           <span class="rank-score-label">{{ res.score }}</span>
         </div>
       </div>
-      <div class="press-key" v-show="showIndexes.includes(-2)">{{ label.rank.press }}</div>
+      <div class="press-key" v-show="showIndexes.includes(-2)">{{ $t("rank.press") }}</div>
     </div>
     <div class="bottom-line"></div>
   </div>

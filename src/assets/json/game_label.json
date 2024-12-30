@@ -1,52 +1,37 @@
 {
-  "home": {
-    "title": "战略配备英雄",
-    "subtitle": "输入任意战略配备代码即可开始！"
-  },
-  "round": {
-    "title": "准备",
-    "subtitle": "回合"
-  },
-  "game": {
-    "score": "得分",
-    "round": "回合"
-  },
-  "rank": {
-    "press": "按任意按键返回主页"
-  },
   "roundLabel": [
     {
-      "label": "本轮加分:",
+      "label": "roundScore",
       "score": 0
     },
     {
-      "label": "时间加分:",
+      "label": "timeScore",
       "score": 0
     },
     {
-      "label": "完美加分:",
+      "label": "perfectScore",
       "score": 0
     },
     {
-      "label": "总计:",
+      "label": "totalScore",
       "score": 0
     }
   ],
   "rankLabel": [
     {
-      "label": "历史最高分数",
+      "label": "historyScore",
       "score": 0
     },
     {
-      "label": "历史最高回合",
+      "label": "historyRound",
       "score": 0
     },
     {
-      "label": "本轮分数",
+      "label": "score",
       "score": 0
     },
     {
-      "label": "本轮持续回合",
+      "label": "round",
       "score": 0
     }
   ]

@@ -1,8 +1,8 @@
-import {ref} from 'vue'
-import {defineStore} from 'pinia'
+import {ref} from "vue";
+import {defineStore} from "pinia";
 
 export const useScore = defineStore(
-    'score',
+    "score",
     () => {
         const score = ref({
             historyScore: 0,
@@ -14,16 +14,16 @@ export const useScore = defineStore(
                           updateHRound: number | null,
                           updateLScore: number | null,
                           updateLRound: number | null) => {
-            if (updateHScore != null) {
+            if (updateHScore !== null) {
                 score.value.historyScore = updateHScore
             }
-            if (updateHRound != null) {
+            if (updateHRound !== null) {
                 score.value.historyRound = updateHRound
             }
-            if (updateLScore != null) {
+            if (updateLScore !== null) {
                 score.value.lastScore = updateLScore
             }
-            if (updateLRound != null) {
+            if (updateLRound !== null) {
                 score.value.lastRound = updateLRound
             }
         }
