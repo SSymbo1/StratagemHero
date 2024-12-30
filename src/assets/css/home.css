@@ -1,3 +1,5 @@
+@import "@/assets/css/game_font.css";
+
 .home-container {
     padding: 0;
     width: 100vw;
@@ -14,22 +16,29 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: url("/public/icons/background/super_earth.webp") no-repeat center;
-    background-size: 40%;
+    background: url("/public/icons/background/super_earth.png") no-repeat center;
+    background-size: 30%;
     background-blend-mode: saturation;
     opacity: 10%;
+    filter: grayscale(100%);
 }
 
 .title {
+    text-shadow: 0 0 4px white;
+    font-family: game;
     color: white;
     font-weight: bold;
-    font-size: 50px;
+    letter-spacing: 1px;
+    font-size: 90px;
 }
 
 .subtitle {
+    text-shadow: 0 0 3px yellow;
+    font-family: game;
     color: yellow;
     font-weight: bold;
-    font-size: 30px;
+    letter-spacing: 5px;
+    font-size: 40px;
 }
 
 .game-container {

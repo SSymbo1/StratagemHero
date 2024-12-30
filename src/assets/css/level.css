@@ -1,3 +1,5 @@
+@import "@/assets/css/game_font.css";
+
 .game-container {
     padding: 0;
     width: 100vw;
@@ -14,10 +16,11 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: url("/public/icons/background/super_earth.webp") no-repeat center;
-    background-size: 40%;
+    background: url("/public/icons/background/super_earth.png") no-repeat center;
+    background-size: 30%;
     background-blend-mode: saturation;
     opacity: 10%;
+    filter: grayscale(100%);
 }
 
 .game-layer {
@@ -55,15 +58,18 @@
 }
 
 .round-layer-label-title {
+    font-family: game;
     font-size: 25px;
 }
 
 .round-layer-label-index {
+    font-family: game;
     font-size: 25px;
     color: gold;
 }
 
 .round-layer-title {
+    font-family: game;
     font-weight: bold;
     font-size: 50px
 }
@@ -86,11 +92,13 @@
 }
 
 .game-side-number {
+    font-family: game;
     font-size: 40px;
     color: gold;
 }
 
 .game-side-label {
+    font-family: game;
     font-size: 20px;
     color: white;
 }
@@ -116,6 +124,7 @@
 }
 
 .stratagems-label {
+    font-family: game;
     background: gold;
     width: 100%;
     height: 50px;
@@ -153,12 +162,14 @@
 }
 
 .result-item-label {
+    font-family: game;
     color: white;
     font-size: 25px;
     font-weight: bold;
 }
 
 .result-score-label {
+    font-family: game;
     color: gold;
     font-size: 30px;
     font-weight: bold;
