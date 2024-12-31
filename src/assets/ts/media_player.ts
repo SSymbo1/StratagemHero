@@ -100,7 +100,7 @@ export class MediaPlayer {
             3: "/StratagemHero/audio/round_complete_4.mp3",
         }
         const completeMediaSrc = roundCompleteMap[this.completeIndex]
-        this.completeIndex++ > 3 ? this.completeIndex = 0 : this.completeIndex++
+        this.completeIndex + 1 > 3 ? this.completeIndex = 0 : this.completeIndex++
         return new Howl({
             src: [completeMediaSrc],
             loop: this.loop,
