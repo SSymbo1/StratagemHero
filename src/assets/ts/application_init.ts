@@ -1,4 +1,5 @@
 import DisableDevtool from "disable-devtool";
+import {MediaPlayer} from "@/assets/ts/media_player.ts";
 
 /**
  * 初始化应用模式,生产环境下关闭控制台
@@ -23,10 +24,6 @@ export const initApplicationLayout = () => {
  * 缓存按键音效
  */
 export const operationSoundCache = () => {
-    const success = new Audio("/StratagemHero/audio/key_press.mp3")
-    const fail = new Audio("/StratagemHero/audio/key_press_fail.mp3")
-    success.muted = true
-    fail.muted = true
-    success.play().then()
-    fail.play().then()
+    new MediaPlayer(false, 0).trueKeyPress().play()
+    new MediaPlayer(false, 0).wrongKeyPress().play()
 }

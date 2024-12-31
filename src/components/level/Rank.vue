@@ -3,7 +3,8 @@ import {onMounted, onUnmounted, ref, Ref} from "vue";
 import {useScore} from "@/store/base/score.ts";
 import label from "@/assets/json/game_label.json";
 import router from "@/router";
-import {COMPONENT} from "@/assets/ts/global.ts";
+import {Component} from "@/assets/ts/global.ts";
+import {MediaPlayer} from "@/assets/ts/media_player.ts";
 
 /**
  * @param label 标签
@@ -56,6 +57,10 @@ const calculateRoundData = () => {
   rankResult.value[2].score = score.value.lastScore
   rankResult.value[3].score = score.value.lastRound
   intervalId.value = setInterval(() => {
+    if (currentIndex.value === -1) {
+      const gameOver = new MediaPlayer(false, 0.5)
+      gameOver.gameOverMusic().play()
+    }
     if (currentIndex.value < rankResult.value.length - 1) {
       currentIndex.value++
       showIndexes.value.push(currentIndex.value)
@@ -64,7 +69,7 @@ const calculateRoundData = () => {
       clearInterval(intervalId.value)
       window.addEventListener("keydown", checkInput)
     }
-  }, COMPONENT.LABEL_SHOW)
+  }, Component.LABEL_SHOW)
 }
 
 /**

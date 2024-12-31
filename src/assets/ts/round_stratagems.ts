@@ -1,5 +1,5 @@
 import stratagems from "@/assets/json/stratagems.json";
-import {GAME} from "@/assets/ts/global.ts";
+import {Game} from "@/assets/ts/global.ts";
 
 /**
  * 战略配备
@@ -16,11 +16,11 @@ export interface Stratagem {
 /**
  * 根据回合数返回当前回合随机到的指定难度数量的战略配备数组
  * @param round 回合数
- * @return Array<Stratagem> 随机战略配备数组
+ * @return {Array<Stratagem>} 随机战略配备数组
  */
 export const randomStratagems = (round: number): Array<Stratagem> => {
-    let baseRoundStratagems: number = GAME.STRATAGEMS
-    if (round > GAME.DIFFICULT_ROUND) {
+    let baseRoundStratagems: number = Game.STRATAGEMS
+    if (round > Game.DIFFICULT_ROUND) {
         baseRoundStratagems = baseRoundStratagems + round
     }
     const origin: Array<Stratagem> = stratagems

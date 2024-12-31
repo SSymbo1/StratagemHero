@@ -1,5 +1,5 @@
 import {Stratagem} from "@/assets/ts/round_stratagems.ts";
-import {GAME} from "@/assets/ts/global.ts";
+import {Game} from "@/assets/ts/global.ts";
 
 /**
  * @param time 本回合时间
@@ -16,17 +16,17 @@ export interface RoundTime {
  * @param round 回合数
  */
 export const roundTimeCalculator = (stratagems: Array<Stratagem>, round: number): RoundTime => {
-    if (round < GAME.DIFFICULT_ROUND) {
+    if (round < Game.DIFFICULT_ROUND) {
         return {
-            time: GAME.TIME,
-            plus: GAME.PER_TIME
+            time: Game.TIME,
+            plus: Game.PER_TIME
         }
     } else {
         let lengthArray: Array<number> = []
         stratagems.forEach(stratagem => {
             lengthArray.push(stratagem.operation.length)
         })
-        let roundTime = lengthArray.filter(length => length >= 7).length * 0.3 + GAME.TIME
+        let roundTime = lengthArray.filter(length => length >= 7).length * 0.3 + Game.TIME
         let plusTime = 1 + Math.random() * 0.5
         if (lengthArray.filter(length => length >= 6).length >= lengthArray.length / 3) {
             plusTime = Math.random() * 0.4 + 0.8
