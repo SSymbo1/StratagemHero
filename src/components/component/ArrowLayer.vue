@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {computed, CSSProperties, ref, watch} from "vue";
+import {MediaPlayer} from "@/assets/ts/media_player.ts";
 
 /**
  * @param arrow 当前战略配备指令
@@ -24,9 +25,9 @@ const errorIndex: any = ref([])
 /**
  * 根据依次输入正确的指令按顺序填充箭头颜色
  * @param index 指令索引
- * @return CSSProperties 渲染箭头样式的css样式表属性
+ * @return {CSSProperties} 渲染箭头样式的css样式表属性
  */
-const fillArrowColor = (index: number) => {
+const fillArrowColor = (index: number): CSSProperties | undefined => {
   if (input.value[index] === stratagem.value[index]) {
     return {
       fill: "gold"
@@ -52,9 +53,8 @@ watch(input, (newVal) => {
           svgElements[s].style.fill = "#ffffff"
         }
       }, 100)
-      const errorSound = new Audio("/StratagemHero/audio/key_press_fail.mp3")
+      new MediaPlayer(false, 1).wrongKeyPress().play()
       emit("error")
-      errorSound.play()
       return
     }
   }

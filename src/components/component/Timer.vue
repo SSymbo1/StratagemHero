@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {computed, CSSProperties, onBeforeUnmount, onMounted, Ref, ref} from "vue";
-import {TIMER} from "@/assets/ts/global.ts";
+import {TimerLayer} from "@/assets/ts/global.ts";
 
 /**
  * @param width 进度条长度
@@ -49,10 +49,10 @@ const progressStyle = computed(() => {
   let currentTransition: string
   if (percentage <= 35) {
     emit("nearlyOver")
-    timerColor = TIMER.DANGER_TIME
+    timerColor = TimerLayer.DANGER_TIME
   } else {
     emit("remainMany")
-    timerColor = TIMER.SAFE_TIME
+    timerColor = TimerLayer.SAFE_TIME
   }
   if (percentage > lastPercentage) {
     currentTransition = "width 0.1s linear"
@@ -97,7 +97,7 @@ const addTime = () => {
 
 /**
  * 获取倒计时进度条剩余时间
- * @return number 剩余时间
+ * @return {number} 剩余时间
  */
 const getRemainTime = (): number => {
   return Math.ceil(remainingTime.value)

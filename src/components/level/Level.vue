@@ -9,12 +9,13 @@ import router from "@/router";
 import ArrowLayer from "@/components/component/ArrowLayer.vue";
 import {useScore} from "@/store/base/score.ts";
 import {roundTimeCalculator} from "@/assets/ts/round_time.ts";
-import {COMPONENT, GAME, TIMER} from "@/assets/ts/global.ts";
+import {Component, Game, TimerLayer} from "@/assets/ts/global.ts";
+import {MediaPlayer} from "@/assets/ts/media_player.ts";
 
-const round: Ref<number> = ref(GAME.ROUND)
-const score: Ref<number> = ref(GAME.SCORE)
-const time: Ref<number> = ref(GAME.TIME)
-const perAddTime: Ref<number> = ref(GAME.PER_TIME)
+const round: Ref<number> = ref(Game.ROUND)
+const score: Ref<number> = ref(Game.SCORE)
+const time: Ref<number> = ref(Game.TIME)
+const perAddTime: Ref<number> = ref(Game.PER_TIME)
 const isRoundStart: Ref<boolean> = ref(true)
 const isRoundResult: Ref<boolean> = ref(false)
 const perfectRound: Ref<boolean> = ref(true)
@@ -32,8 +33,10 @@ const roundResult: Ref<Array<RoundResult>> = ref(label.roundLabel)
 const currentIndex: Ref<number> = ref(-1)
 const showIndexes: Ref<Array<number>> = ref([])
 const intervalId: any = ref(null)
-const labelColor: Ref<string> = ref(TIMER.SAFE_TIME)
+const labelColor: Ref<string> = ref(Timer.SAFE_TIME)
 const remainTime: Ref<boolean> = ref(true)
+const backgroundHowl: Ref<Howl | undefined> = ref(undefined)
+const roundCompleteHowl: Ref<MediaPlayer | undefined> = ref(undefined)
 
 /**
  * @param label 标签
@@ -48,6 +51,7 @@ interface RoundResult {
  * 每回合开始前进行数据处理
  */
 const readyForRoundBegin = () => {
+  new MediaPlayer(false, 0.5).getReadyMusic().play()
   perfectRound.value = true
   isRoundResult.value = false
   isRoundStart.value = true
@@ -63,13 +67,22 @@ const readyForRoundBegin = () => {
   setTimeout(() => {
     window.addEventListener("keydown", checkInput)
     isRoundStart.value = false
-  }, COMPONENT.READY_WAIT)
+    if (backgroundHowl.value === undefined) {
+      backgroundHowl.value = new MediaPlayer(true, 0.5).backgroundMusic()
+      backgroundHowl.value.play()
+    } else {
+      backgroundHowl.value.play()
+    }
+  }, Component.READY_WAIT)
 }
 
 /**
  * 回合因倒计时终止而结束
  */
 const timeUp = () => {
+  if (backgroundHowl.value !== undefined) {
+    backgroundHowl.value.stop()
+  }
   let useScoreStore = useScore()
   useScoreStore.setScore(null, null, score.value, round.value)
   router.replace("/rank")
@@ -79,19 +92,22 @@ const timeUp = () => {
  * 回合胜利进行数据处理
  */
 const roundStratagemsRunOut = () => {
+  if (backgroundHowl.value !== undefined) {
+    backgroundHowl.value.stop()
+  }
   window.removeEventListener("keydown", checkInput)
   let remainTime: number = timer.value.getRemainTime()
-  if (round.value <= GAME.DIFFICULT_ROUND && perfectRound.value) {
-    perfectScore.value = GAME.PERFECT_SCORE
-  } else if (round.value > GAME.DIFFICULT_ROUND && perfectRound.value) {
-    perfectScore.value = GAME.PERFECT_SCORE + round.value
+  if (round.value <= Game.DIFFICULT_ROUND && perfectRound.value) {
+    perfectScore.value = Game.PERFECT_SCORE
+  } else if (round.value > Game.DIFFICULT_ROUND && perfectRound.value) {
+    perfectScore.value = Game.PERFECT_SCORE + round.value * 2
   } else if (!perfectRound.value) {
     perfectScore.value = 0
   }
-  if (round.value <= GAME.DIFFICULT_ROUND) {
-    roundScore.value = GAME.ROUND_SCORE
+  if (round.value <= Game.DIFFICULT_ROUND) {
+    roundScore.value = Game.ROUND_SCORE
   } else {
-    roundScore.value = GAME.DIFFICULT_SCORE
+    roundScore.value = Game.DIFFICULT_SCORE
   }
   timeScore.value = remainTime * roundStratagemsCount.value
   score.value = score.value + perfectScore.value + timeScore.value + roundScore.value
@@ -103,16 +119,24 @@ const roundStratagemsRunOut = () => {
   currentIndex.value = -1
   showIndexes.value = []
   intervalId.value = setInterval(() => {
+    if (currentIndex.value === -1) {
+      if (roundCompleteHowl.value === undefined) {
+        roundCompleteHowl.value = new MediaPlayer(false, 0.5)
+        roundCompleteHowl.value.roundCompleteMusic().play()
+      } else {
+        roundCompleteHowl.value.roundCompleteMusic().play()
+      }
+    }
     if (currentIndex.value < roundResult.value.length - 1) {
       currentIndex.value++
       showIndexes.value.push(currentIndex.value)
     } else {
       clearInterval(intervalId.value)
     }
-  }, COMPONENT.LABEL_SHOW)
+  }, Component.LABEL_SHOW)
   setTimeout(() => {
     readyForRoundBegin()
-  }, COMPONENT.ROUND_RESULT_WAIT)
+  }, Component.ROUND_RESULT_WAIT)
 }
 
 /**
@@ -121,7 +145,7 @@ const roundStratagemsRunOut = () => {
  */
 const checkInput = (event: KeyboardEvent) => {
   if (operation.includes(event.key)) {
-    const errorSound = new Audio("/StratagemHero/audio/key_press.mp3")
+    new MediaPlayer(false, 1).trueKeyPress().play()
     if (event.key === "ArrowUp" || event.key === "W" || event.key === "w") {
       inputOperation.value.push(1)
     } else if (event.key === "ArrowDown" || event.key === "S" || event.key === "s") {
@@ -131,7 +155,6 @@ const checkInput = (event: KeyboardEvent) => {
     } else if (event.key === "ArrowRight" || event.key === "D" || event.key === "d") {
       inputOperation.value.push(4)
     }
-    errorSound.play()
   }
 }
 
@@ -150,8 +173,9 @@ const currentStratagem = (stratagem: Stratagem) => {
 const arrowCheckSuccess = () => {
   timer.value.addTime()
   stratagemsLayer.value.removeFirstStratagem()
-  score.value += GAME.PER_SCORE
+  score.value += Game.PER_SCORE
   inputOperation.value = []
+  new MediaPlayer(false, 0.5).successMusic().play()
 }
 
 /**
@@ -166,7 +190,7 @@ const arrowCheckError = () => {
  * 回合时间将要耗尽
  */
 const timeNearlyRunOut = () => {
-  labelColor.value = TIMER.DANGER_TIME
+  labelColor.value = TimerLayer.DANGER_TIME
   remainTime.value = false
   dynamicLabelColor.value
 }
@@ -175,14 +199,14 @@ const timeNearlyRunOut = () => {
  * 回合时间充裕
  */
 const ampleTime = () => {
-  labelColor.value = TIMER.SAFE_TIME
+  labelColor.value = TimerLayer.SAFE_TIME
   remainTime.value = true
   dynamicLabelColor.value
 }
 
 /**
  * 动态渲染label颜色
- * @return CSSProperties label的css样式表属性
+ * @return {CSSProperties} label的css样式表属性
  */
 const dynamicLabelColor = computed(() => {
   return {
@@ -192,10 +216,13 @@ const dynamicLabelColor = computed(() => {
 
 onMounted(() => {
   readyForRoundBegin()
+
 })
 onUnmounted(() => {
   window.removeEventListener("keydown", checkInput)
   clearInterval(intervalId.value)
+  backgroundHowl.value?.stop()
+  roundCompleteHowl.value?.roundCompleteMusic().stop()
 })
 </script>
 

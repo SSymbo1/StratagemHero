@@ -3,16 +3,6 @@
     width: 80px;
 }
 
-.arrow {
-    width: 100%;
-}
-
-.arrow-fill {
-    height: 80px;
-    width: 80px;
-    z-index: 1;
-}
-
 .arrow-layer {
     display: flex;
     flex-direction: row;

@@ -1,8 +1,8 @@
 /**
- * @enum
+ * @enum {number}
  * 游戏组件参数枚举
  */
-export enum COMPONENT {
+export enum Component {
     /** 准备阶段持续时间 **/
     READY_WAIT = 3000,
     /** 回合结果持续时间 **/
@@ -13,10 +13,10 @@ export enum COMPONENT {
 }
 
 /**
- * @enum
+ * @enum {number}
  * 游戏参数枚举
  */
-export enum GAME {
+export enum Game {
     /** 基础回合时间 **/
     TIME = 15,
     /** 基础续时时间 **/
@@ -40,10 +40,10 @@ export enum GAME {
 }
 
 /**
- * @enum
+ * @enum {string}
  * 计时器颜色配置枚举
  */
-export enum TIMER {
+export enum TimerLayer {
     /** 剩余足够时间时timer颜色 **/
     SAFE_TIME = "gold",
     /** 剩余时间不足时timer颜色 **/
