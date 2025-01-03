@@ -58,10 +58,10 @@ defineExpose({
 @import "@/assets/css/stratagems_layer.css";
 
 .yellow-border {
-  border: 5px solid gold;
+  border: 0.3vw solid gold;
 }
 
 .red-border {
-  border: 5px solid red;
+  border: 0.3vw solid red;
 }
 </style>

@@ -3,7 +3,6 @@
 .rank-container {
     padding: 0;
     width: 100vw;
-    height: 100vh;
     background: black;
     display: flex;
     flex-direction: column;
@@ -23,29 +22,19 @@
     filter: grayscale(100%);
 }
 
-.top-line {
-    border-bottom: 5px solid white;
-    height: 100px
-}
-
-.bottom-line {
-    border-top: 5px solid white;
-    height: 100px
-}
-
 .rank-container-layer {
     height: 50vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    gap: 50px;
+    gap: 6vh;
 }
 
 .rank-result-layer {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 500px;
+    gap: 29vw;
 }
 
 .rank-container-padding {
@@ -57,22 +46,26 @@
 }
 
 .rank-item-label {
+    text-shadow: 0 0 0.3rem white;
     font-family: game;
     color: white;
-    font-size: 25px;
+    font-size: 1.6vw;
     font-weight: bold;
 }
 
 .rank-score-label {
+    text-shadow: 0 0 0.2rem yellow;
     font-family: game;
     color: gold;
-    font-size: 30px;
+    font-size: 1.6vw;
     font-weight: bold;
 }
 
 .press-key {
+    text-shadow: 0 0 0.2rem yellow;
     font-family: game;
     color: gold;
-    font-size: 30px;
+    letter-spacing: 0.2rem;
+    font-size: 1.9vw;
     font-weight: bold;
 }

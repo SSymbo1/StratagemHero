@@ -1,10 +1,15 @@
 .stratagems-container {
-    width: 200px;
+    width: 12.3vw;
     height: 100%;
     margin: 0;
 }
 
 .stratagems-label {
-    height: 200px;
-    width: 200px;
+    height: 22.8vh;
+    width: 12vw;
+}
+
+.stratagems-label img {
+    width: 100%;
+    height: 100%;
 }

@@ -5,6 +5,10 @@ import label from "@/assets/json/game_label.json";
 import router from "@/router";
 import {Component} from "@/assets/ts/global.ts";
 import {MediaPlayer} from "@/assets/ts/media_player.ts";
+import Hammer from "hammerjs";
+
+const hammerArea: Ref<HTMLElement | null> = ref(null)
+const hammerInstance: Ref<HammerManager | null> = ref(null)
 
 /**
  * @param label 标签
@@ -68,6 +72,11 @@ const calculateRoundData = () => {
       showIndexes.value.push(-2)
       clearInterval(intervalId.value)
       window.addEventListener("keydown", checkInput)
+      if (hammerArea.value) {
+        hammerInstance.value = new Hammer(hammerArea.value)
+        hammerInstance.value.get("swipe").set({direction: Hammer.DIRECTION_ALL});
+        hammerInstance.value.on("swipe", checkInput)
+      }
     }
   }, Component.LABEL_SHOW)
 }
@@ -85,13 +94,13 @@ onMounted(() => {
 
 onUnmounted(() => {
   window.removeEventListener("keydown", checkInput)
+  hammerInstance.value?.off("swipe", checkInput)
   clearInterval(intervalId.value)
 })
 </script>
 
 <template>
-  <div class="rank-container">
-    <div class="top-line"></div>
+  <div class="rank-container" ref="hammerArea">
     <div class="rank-container-padding">
       <div class="rank-container-layer">
         <div class="rank-result-layer"
@@ -104,7 +113,6 @@ onUnmounted(() => {
       </div>
       <div class="press-key" v-show="showIndexes.includes(-2)">{{ $t("rank.press") }}</div>
     </div>
-    <div class="bottom-line"></div>
   </div>
 </template>
 

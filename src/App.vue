@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import {onMounted} from "vue";
-import {
-  initApplicationLayout,
-  initApplicationMode,
-} from "@/assets/ts/application_init.ts";
+import {initApplicationLayout, initApplicationMode} from "@/assets/ts/application_init.ts";
 
 onMounted(() => {
   initApplicationLayout()
@@ -12,11 +9,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <router-view></router-view>
+  <div class="app-container">
+    <div class="top-border"></div>
+    <router-view class="game"></router-view>
+    <div class="bottom-border"></div>
+  </div>
 </template>
 
 <style>
-body:hover {
-  cursor: none;
-}
+@import "@/assets/css/app.css";
 </style>
