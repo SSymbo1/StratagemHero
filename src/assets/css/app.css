@@ -1,0 +1,32 @@
+body:hover {
+    cursor: none;
+}
+
+.app-container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    background: black;
+    padding: 0;
+}
+
+.top-border, .bottom-border {
+    width: 100vw;
+    height: 15vh;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+.game {
+    width: 100vw;
+    height: 70vh;
+}
+
+.top-border {
+    border-bottom: 0.6vh solid white;
+}
+
+.bottom-border {
+    border-top: 0.6vh solid white;
+}

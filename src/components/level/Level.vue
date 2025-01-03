@@ -11,6 +11,7 @@ import {useScore} from "@/store/base/score.ts";
 import {roundTimeCalculator} from "@/assets/ts/round_time.ts";
 import {Component, Game, TimerLayer} from "@/assets/ts/global.ts";
 import {MediaPlayer} from "@/assets/ts/media_player.ts";
+import Hammer from "hammerjs";
 
 const round: Ref<number> = ref(Game.ROUND)
 const score: Ref<number> = ref(Game.SCORE)
@@ -37,6 +38,8 @@ const labelColor: Ref<string> = ref(Timer.SAFE_TIME)
 const remainTime: Ref<boolean> = ref(true)
 const backgroundHowl: Ref<Howl | undefined> = ref(undefined)
 const roundCompleteHowl: Ref<MediaPlayer | undefined> = ref(undefined)
+const hammerArea: Ref<HTMLElement | null> = ref(null)
+const hammerInstance: Ref<HammerManager | null> = ref(null)
 
 /**
  * @param label 标签
@@ -65,6 +68,11 @@ const readyForRoundBegin = () => {
   localStratagemName.value = stratagems.value[0].name
   localStratagemArrow.value = stratagems.value[0].operation
   setTimeout(() => {
+    if (hammerArea.value) {
+      hammerInstance.value = new Hammer(hammerArea.value)
+      hammerInstance.value.get("swipe").set({direction: Hammer.DIRECTION_ALL});
+      hammerInstance.value.on("swipe", checkInput)
+    }
     window.addEventListener("keydown", checkInput)
     isRoundStart.value = false
     if (backgroundHowl.value === undefined) {
@@ -96,6 +104,7 @@ const roundStratagemsRunOut = () => {
     backgroundHowl.value.stop()
   }
   window.removeEventListener("keydown", checkInput)
+  hammerInstance.value?.off("swipe", checkInput)
   let remainTime: number = timer.value.getRemainTime()
   if (round.value <= Game.DIFFICULT_ROUND && perfectRound.value) {
     perfectScore.value = Game.PERFECT_SCORE
@@ -141,19 +150,34 @@ const roundStratagemsRunOut = () => {
 
 /**
  * 键盘输入检查
- * @param event 键盘事件
+ * @param event 键盘事件或触控事件
  */
-const checkInput = (event: KeyboardEvent) => {
-  if (operation.includes(event.key)) {
-    new MediaPlayer(false, 1).trueKeyPress().play()
-    if (event.key === "ArrowUp" || event.key === "W" || event.key === "w") {
-      inputOperation.value.push(1)
-    } else if (event.key === "ArrowDown" || event.key === "S" || event.key === "s") {
-      inputOperation.value.push(2)
-    } else if (event.key === "ArrowLeft" || event.key === "A" || event.key === "a") {
-      inputOperation.value.push(3)
-    } else if (event.key === "ArrowRight" || event.key === "D" || event.key === "d") {
-      inputOperation.value.push(4)
+const checkInput = (event: KeyboardEvent | HammerInput) => {
+  if (event instanceof KeyboardEvent) {
+    if (operation.keyboard.includes(event.key)) {
+      new MediaPlayer(false, 1).trueKeyPress().play()
+      if (event.key === "ArrowUp" || event.key === "W" || event.key === "w") {
+        inputOperation.value.push(1)
+      } else if (event.key === "ArrowDown" || event.key === "S" || event.key === "s") {
+        inputOperation.value.push(2)
+      } else if (event.key === "ArrowLeft" || event.key === "A" || event.key === "a") {
+        inputOperation.value.push(3)
+      } else if (event.key === "ArrowRight" || event.key === "D" || event.key === "d") {
+        inputOperation.value.push(4)
+      }
+    }
+  } else {
+    if (operation.touch.includes(event.direction)) {
+      new MediaPlayer(false, 1).trueKeyPress().play()
+      if (event.direction === Hammer.DIRECTION_UP) {
+        inputOperation.value.push(1)
+      } else if (event.direction === Hammer.DIRECTION_DOWN) {
+        inputOperation.value.push(2)
+      } else if (event.direction === Hammer.DIRECTION_LEFT) {
+        inputOperation.value.push(3)
+      } else if (event.direction === Hammer.DIRECTION_RIGHT) {
+        inputOperation.value.push(4)
+      }
     }
   }
 }
@@ -216,10 +240,11 @@ const dynamicLabelColor = computed(() => {
 
 onMounted(() => {
   readyForRoundBegin()
-
 })
+
 onUnmounted(() => {
   window.removeEventListener("keydown", checkInput)
+  hammerInstance.value?.off("swipe", checkInput)
   clearInterval(intervalId.value)
   backgroundHowl.value?.stop()
   roundCompleteHowl.value?.roundCompleteMusic().stop()
@@ -227,8 +252,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="game-container">
-    <div class="top-line"></div>
+  <div class="game-container" ref="hammerArea">
     <div class="round-layer" v-if="isRoundStart && !isRoundResult">
       <div class="round-layer-title">{{ $t("round.title") }}</div>
       <div class="round-layer-label">
@@ -289,7 +313,6 @@ onUnmounted(() => {
         </div>
       </div>
     </div>
-    <div class="bottom-line"></div>
   </div>
 </template>
 

@@ -45,7 +45,7 @@ Vite + TypeScript + Vue3 Project: Helldivers 2 - StratagemHero Game
 ```
 ├── public
 │   ├── audio           (audio files)
-│   ├── font            (fonts files)
+│   ├── font            (font files)
 │   ├── icons           
 │   │   ├── background  (game background images)
 │   │   └── stratagems  (stratagems icons)

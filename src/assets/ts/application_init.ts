@@ -13,7 +13,7 @@ export const initApplicationMode = () => {
 /**
  * 初始化应用布局，检测是否移动端
  */
-export const initApplicationLayout = () => {
+export const initApplicationLayout = async () => {
     let agent: RegExpMatchArray | null = navigator.userAgent.match(/Android|webOS|iPhone|iPad|Opera Mini/i)
     if (agent !== null) {
 

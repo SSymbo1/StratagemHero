@@ -3,7 +3,6 @@
 .home-container {
     padding: 0;
     width: 100vw;
-    height: 100vh;
     background: black;
     display: flex;
     flex-direction: column;
@@ -24,21 +23,21 @@
 }
 
 .title {
-    text-shadow: 0 0 4px white;
+    text-shadow: 0 0 0.4rem white;
     font-family: game;
     color: white;
     font-weight: bold;
-    letter-spacing: 1px;
-    font-size: 90px;
+    letter-spacing: 0.3rem;
+    font-size: 6vw;
 }
 
 .subtitle {
-    text-shadow: 0 0 3px yellow;
+    text-shadow: 0 0 0.4rem yellow;
     font-family: game;
     color: yellow;
     font-weight: bold;
-    letter-spacing: 5px;
-    font-size: 40px;
+    letter-spacing: 0.4rem;
+    font-size: 3vw;
 }
 
 .game-container {
@@ -47,15 +46,5 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 50px;
-}
-
-.top-line {
-    border-bottom: 5px solid white;
-    height: 100px
-}
-
-.bottom-line {
-    border-top: 5px solid white;
-    height: 100px
+    gap: 8vh;
 }

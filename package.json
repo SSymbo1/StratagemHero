@@ -9,8 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/hammerjs": "^2.0.46",
     "@types/howler": "^2.2.12",
     "disable-devtool": "^0.3.8",
+    "hammerjs": "^2.0.8",
     "howler": "^2.2.4",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",

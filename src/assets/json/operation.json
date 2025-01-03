@@ -1,14 +1,22 @@
-[
-  "ArrowUp",
-  "ArrowDown",
-  "ArrowLeft",
-  "ArrowRight",
-  "W",
-  "A",
-  "S",
-  "D",
-  "w",
-  "a",
-  "s",
-  "d"
-]
+{
+  "keyboard": [
+    "ArrowUp",
+    "ArrowDown",
+    "ArrowLeft",
+    "ArrowRight",
+    "W",
+    "A",
+    "S",
+    "D",
+    "w",
+    "a",
+    "s",
+    "d"
+  ],
+  "touch": [
+    2,
+    4,
+    8,
+    16
+  ]
+}

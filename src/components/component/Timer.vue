@@ -35,7 +35,7 @@ const progressBarStyle = computed(() => {
     width: `${props.width}vw`,
     backgroundColor: "gray",
     position: "relative",
-    height: "20px",
+    height: "2vh",
     overflow: "hidden"
   } as CSSProperties
 })
