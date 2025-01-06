@@ -1,22 +1,15 @@
 {
-  "keyboard": [
-    "ArrowUp",
-    "ArrowDown",
-    "ArrowLeft",
-    "ArrowRight",
-    "W",
-    "A",
-    "S",
-    "D",
-    "w",
-    "a",
-    "s",
-    "d"
-  ],
-  "touch": [
-    2,
-    4,
-    8,
-    16
-  ]
+  "keyboard": {
+    "up": ["ArrowUp","W","w"],
+    "down": ["ArrowDown","S","s"],
+    "left": ["ArrowLeft","A","a"],
+    "right": ["ArrowRight","D","d"]
+  },
+  "swipe": {
+    "up": 8,
+    "down": 16,
+    "left": 2,
+    "right":4
+  },
+  "controller": {}
 }

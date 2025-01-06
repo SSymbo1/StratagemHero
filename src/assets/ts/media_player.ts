@@ -1,6 +1,33 @@
 import {Howl} from "howler";
 
 /**
+ * @enum {string}
+ * 音频文件路径枚举
+ */
+export enum Audio {
+    /** 正确按键音效 **/
+    PRESS_KEY = "/StratagemHero/audio/key_press.ogg",
+    /** 错误按键音效 **/
+    WRONG_KEY_PRESS = "/StratagemHero/audio/wrong_key_press.ogg",
+    /** 完整输入战备音效 **/
+    SUCCESS = "/StratagemHero/audio/success.ogg",
+    /** 准备环节音效 **/
+    GET_READY = "/StratagemHero/audio/get_ready.ogg",
+    /** 游戏结束音效 **/
+    GAME_OVER = "/StratagemHero/audio/game_over.ogg",
+    /** 回合进行时背景音效 **/
+    BACKGROUND = "/StratagemHero/audio/background.ogg",
+    /** 回合结束音效1 **/
+    COMPLETE_1 = "/StratagemHero/audio/round_complete_1.mp3",
+    /** 回合结束音效2 **/
+    COMPLETE_2 = "/StratagemHero/audio/round_complete_2.mp3",
+    /** 回合结束音效3 **/
+    COMPLETE_3 = "/StratagemHero/audio/round_complete_3.mp3",
+    /** 回合结束音效4 **/
+    COMPLETE_4 = "/StratagemHero/audio/round_complete_4.mp3",
+}
+
+/**
  * 游戏音频播放器类（封装howler）
  * @desc 实例化时需要传入是否循环{loop:boolean}和音量{volume:number}
  */
@@ -16,72 +43,26 @@ export class MediaPlayer {
     }
 
     /**
-     * 按下正确指令的音效
+     * 预加载音频文件，使得第一次游戏时音频同步
+     * @return {Promise<boolean>} 是否已经静音播放一轮所有音频文件
+     */
+    audioFilePreload = (): Promise<boolean> => {
+        return new Promise((resolve) => {
+            for (const audio of Object.values(Audio)) {
+                this.audioPlay(audio).play()
+            }
+            resolve(true)
+        })
+    }
+
+    /**
+     * 播放指定的音频
+     * @param audio 音频文件路径
      * @return {Howl} 封装音效的Howl的实例
      */
-    trueKeyPress = (): Howl => {
+    audioPlay = (audio: string): Howl => {
         return new Howl({
-            src: ["/StratagemHero/audio/key_press.ogg"],
-            loop: this.loop,
-            volume: this.volume
-        })
-    }
-
-    /**
-     * 按下错误指令的音效
-     * @return {Howl} 封装音效的Howl的实例
-     */
-    wrongKeyPress = (): Howl => {
-        return new Howl({
-            src: ["/StratagemHero/audio/wrong_key_press.ogg"],
-            loop: this.loop,
-            volume: this.volume
-        })
-    }
-
-    /**
-     * 游戏回合进行时的背景音乐
-     * @returns {Howl} 封装音效的Howl的实例
-     */
-    backgroundMusic = (): Howl => {
-        return new Howl({
-            src: ["/StratagemHero/audio/background.ogg"],
-            loop: this.loop,
-            volume: this.volume
-        })
-    }
-
-    /**
-     * 游戏结束时的背景音乐
-     * @return {Howl} 封装音效的Howl的实例
-     */
-    gameOverMusic = (): Howl => {
-        return new Howl({
-            src: ["/StratagemHero/audio/game_over.ogg"],
-            loop: this.loop,
-            volume: this.volume
-        })
-    }
-
-    /**
-     * 游戏回合准备环节时的背景音乐
-     * @returns {Howl} 封装音效的Howl的实例
-     */
-    getReadyMusic = (): Howl => {
-        return new Howl({
-            src: ["/StratagemHero/audio/get_ready.ogg"],
-            loop: this.loop,
-            volume: this.volume
-        })
-    }
-
-    /**
-     * 成功输入一项战备时的音效
-     * @returns {Howl} 封装音效的Howl的实例
-     */
-    successMusic = (): Howl => {
-        return new Howl({
-            src: ["/StratagemHero/audio/success.ogg"],
+            src: [audio],
             loop: this.loop,
             volume: this.volume
         })
@@ -94,10 +75,10 @@ export class MediaPlayer {
      */
     roundCompleteMusic = (): Howl => {
         const roundCompleteMap: { [key: number]: string } = {
-            0: "/StratagemHero/audio/round_complete_1.mp3",
-            1: "/StratagemHero/audio/round_complete_2.mp3",
-            2: "/StratagemHero/audio/round_complete_3.mp3",
-            3: "/StratagemHero/audio/round_complete_4.mp3",
+            0: Audio.COMPLETE_1,
+            1: Audio.COMPLETE_2,
+            2: Audio.COMPLETE_3,
+            3: Audio.COMPLETE_4,
         }
         const completeMediaSrc = roundCompleteMap[this.completeIndex]
         this.completeIndex + 1 > 3 ? this.completeIndex = 0 : this.completeIndex++
