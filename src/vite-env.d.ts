@@ -10,17 +10,6 @@ declare module '*.json' {
     export default value
 }
 
-declare module "*.css" {
-    const value: any
-    export default value
-}
-
 declare interface ImportMeta {
     readonly env: ImpoertMetaEnv
-}
-
-interface HTMLElement {
-    mozRequestFullScreen?(): void
-    webkitRequestFullscreen?(): void
-    msRequestFullscreen?(): void
 }

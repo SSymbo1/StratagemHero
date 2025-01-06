@@ -4,7 +4,7 @@ import {useScore} from "@/store/base/score.ts";
 import label from "@/assets/json/game_label.json";
 import router from "@/router";
 import {Component} from "@/assets/ts/global.ts";
-import {MediaPlayer} from "@/assets/ts/media_player.ts";
+import {Audio, MediaPlayer} from "@/assets/ts/media_player.ts";
 import Hammer from "hammerjs";
 
 const hammerArea: Ref<HTMLElement | null> = ref(null)
@@ -62,8 +62,7 @@ const calculateRoundData = () => {
   rankResult.value[3].score = score.value.lastRound
   intervalId.value = setInterval(() => {
     if (currentIndex.value === -1) {
-      const gameOver = new MediaPlayer(false, 0.5)
-      gameOver.gameOverMusic().play()
+      new MediaPlayer(false, 0.5).audioPlay(Audio.GAME_OVER).play()
     }
     if (currentIndex.value < rankResult.value.length - 1) {
       currentIndex.value++

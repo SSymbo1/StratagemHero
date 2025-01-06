@@ -2,7 +2,6 @@
 import {computed, CSSProperties, onMounted, onUnmounted, Ref, ref} from "vue";
 import label from "@/assets/json/game_label.json";
 import Timer from "@/components/component/Timer.vue";
-import operation from "@/assets/json/operation.json";
 import StratagemsLayer from "@/components/component/StratagemsLayer.vue";
 import {randomStratagems, Stratagem} from "@/assets/ts/round_stratagems.ts";
 import router from "@/router";
@@ -10,8 +9,9 @@ import ArrowLayer from "@/components/component/ArrowLayer.vue";
 import {useScore} from "@/store/base/score.ts";
 import {roundTimeCalculator} from "@/assets/ts/round_time.ts";
 import {Component, Game, TimerLayer} from "@/assets/ts/global.ts";
-import {MediaPlayer} from "@/assets/ts/media_player.ts";
+import {Audio, MediaPlayer} from "@/assets/ts/media_player.ts";
 import Hammer from "hammerjs";
+import {Operation} from "@/assets/ts/operation.ts";
 
 const round: Ref<number> = ref(Game.ROUND)
 const score: Ref<number> = ref(Game.SCORE)
@@ -54,7 +54,7 @@ interface RoundResult {
  * 每回合开始前进行数据处理
  */
 const readyForRoundBegin = () => {
-  new MediaPlayer(false, 0.5).getReadyMusic().play()
+  new MediaPlayer(false, 0.5).audioPlay(Audio.GET_READY).play()
   perfectRound.value = true
   isRoundResult.value = false
   isRoundStart.value = true
@@ -76,7 +76,7 @@ const readyForRoundBegin = () => {
     window.addEventListener("keydown", checkInput)
     isRoundStart.value = false
     if (backgroundHowl.value === undefined) {
-      backgroundHowl.value = new MediaPlayer(true, 0.5).backgroundMusic()
+      backgroundHowl.value = new MediaPlayer(true, 0.5).audioPlay(Audio.BACKGROUND)
       backgroundHowl.value.play()
     } else {
       backgroundHowl.value.play()
@@ -153,32 +153,10 @@ const roundStratagemsRunOut = () => {
  * @param event 键盘事件或触控事件
  */
 const checkInput = (event: KeyboardEvent | HammerInput) => {
-  if (event instanceof KeyboardEvent) {
-    if (operation.keyboard.includes(event.key)) {
-      new MediaPlayer(false, 1).trueKeyPress().play()
-      if (event.key === "ArrowUp" || event.key === "W" || event.key === "w") {
-        inputOperation.value.push(1)
-      } else if (event.key === "ArrowDown" || event.key === "S" || event.key === "s") {
-        inputOperation.value.push(2)
-      } else if (event.key === "ArrowLeft" || event.key === "A" || event.key === "a") {
-        inputOperation.value.push(3)
-      } else if (event.key === "ArrowRight" || event.key === "D" || event.key === "d") {
-        inputOperation.value.push(4)
-      }
-    }
-  } else {
-    if (operation.touch.includes(event.direction)) {
-      new MediaPlayer(false, 1).trueKeyPress().play()
-      if (event.direction === Hammer.DIRECTION_UP) {
-        inputOperation.value.push(1)
-      } else if (event.direction === Hammer.DIRECTION_DOWN) {
-        inputOperation.value.push(2)
-      } else if (event.direction === Hammer.DIRECTION_LEFT) {
-        inputOperation.value.push(3)
-      } else if (event.direction === Hammer.DIRECTION_RIGHT) {
-        inputOperation.value.push(4)
-      }
-    }
+  const operation = new Operation(event)
+  if (operation.checkOPEffective()) {
+    new MediaPlayer(false, 1).audioPlay(Audio.PRESS_KEY).play()
+    inputOperation.value.push(operation.transformOP2Direction())
   }
 }
 
@@ -199,7 +177,7 @@ const arrowCheckSuccess = () => {
   stratagemsLayer.value.removeFirstStratagem()
   score.value += Game.PER_SCORE
   inputOperation.value = []
-  new MediaPlayer(false, 0.5).successMusic().play()
+  new MediaPlayer(false, 0.5).audioPlay(Audio.SUCCESS).play()
 }
 
 /**

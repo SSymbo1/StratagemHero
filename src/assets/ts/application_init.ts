@@ -21,9 +21,8 @@ export const initApplicationLayout = async () => {
 }
 
 /**
- * 缓存按键音效
+ * 缓存音效
  */
-export const operationSoundCache = () => {
-    new MediaPlayer(false, 0).trueKeyPress().play()
-    new MediaPlayer(false, 0).wrongKeyPress().play()
+export const operationSoundCache = async (): Promise<boolean> => {
+    return await new MediaPlayer(false, 0).audioFilePreload()
 }
