@@ -73,7 +73,7 @@ const calculateRoundData = () => {
       window.addEventListener("keydown", checkInput)
       if (hammerArea.value) {
         hammerInstance.value = new Hammer(hammerArea.value)
-        hammerInstance.value.get("swipe").set({direction: Hammer.DIRECTION_ALL});
+        hammerInstance.value.get("swipe").set({direction: Hammer.DIRECTION_ALL})
         hammerInstance.value.on("swipe", checkInput)
       }
     }

@@ -70,7 +70,7 @@ const readyForRoundBegin = () => {
   setTimeout(() => {
     if (hammerArea.value) {
       hammerInstance.value = new Hammer(hammerArea.value)
-      hammerInstance.value.get("swipe").set({direction: Hammer.DIRECTION_ALL});
+      hammerInstance.value.get("swipe").set({direction: Hammer.DIRECTION_ALL})
       hammerInstance.value.on("swipe", checkInput)
     }
     window.addEventListener("keydown", checkInput)
@@ -189,6 +189,14 @@ const arrowCheckError = () => {
 }
 
 /**
+ * 当前战略配备组件信号传递
+ * @param percent 当前战略配备指令完成百分比
+ */
+const deliverCommandPercent = (percent: number) => {
+  stratagemsLayer.value.stratagemsLayerFilter(percent)
+}
+
+/**
  * 回合时间将要耗尽
  */
 const timeNearlyRunOut = () => {
@@ -247,11 +255,11 @@ onUnmounted(() => {
         <div class="stratagems">
           <div class="stratagems-pointer">
             <StratagemsLayer
+                ref="stratagemsLayer"
                 :stratagems="stratagems"
                 :ample-time="remainTime"
                 @clear-up="roundStratagemsRunOut"
-                @now-stratagem="currentStratagem"
-                ref="stratagemsLayer">
+                @now-stratagem="currentStratagem">
             </StratagemsLayer>
           </div>
           <div class="stratagems-label" :style="dynamicLabelColor">
@@ -262,6 +270,7 @@ onUnmounted(() => {
           <ArrowLayer
               :arrow="localStratagemArrow"
               :operation="inputOperation"
+              @percent="deliverCommandPercent"
               @success="arrowCheckSuccess"
               @error="arrowCheckError">
           </ArrowLayer>
