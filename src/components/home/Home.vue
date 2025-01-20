@@ -21,7 +21,7 @@ const startGame = async (event: KeyboardEvent | HammerInput) => {
 onMounted(() => {
   if (hammerArea.value) {
     hammerInstance.value = new Hammer(hammerArea.value)
-    hammerInstance.value.get("swipe").set({direction: Hammer.DIRECTION_ALL});
+    hammerInstance.value.get("swipe").set({direction: Hammer.DIRECTION_ALL})
     hammerInstance.value.on("swipe", startGame)
   }
   window.addEventListener("keydown", startGame)

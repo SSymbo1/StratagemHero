@@ -2,7 +2,7 @@ import operation from "@/assets/json/operation.json";
 
 /**
  * @enum {number}
- * 箭头方向指令
+ * 箭头方向指令，如果修改这里的方向映射那么战备json文件也要修改
  */
 export enum Direction {
     UP = 1,

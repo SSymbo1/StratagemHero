@@ -8,7 +8,7 @@
 
 <div align="center">
 
-[**中文**](./README.md) | [**English**](./README_en.md) 
+**中文** | [**English**](./README_en.md) 
 
 </div>
 

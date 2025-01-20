@@ -5,9 +5,7 @@ import {MediaPlayer} from "@/assets/ts/media_player.ts";
  * 初始化应用模式,生产环境下关闭控制台
  */
 export const initApplicationMode = () => {
-    if (import.meta.env.MODE === "production") {
-        DisableDevtool()
-    }
+    import.meta.env.MODE === "production" ? DisableDevtool() : console.log(`mode:${import.meta.env.MODE}`)
 }
 
 /**
