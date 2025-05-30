@@ -105,5 +105,9 @@ export default {
         tectonic_drill: "Tectonic Drill",
         tesla_tower: "Tesla Tower",
         upload_data: "Upload Data",
+        grenadier_battlement: "Grenadier Battlement",
+        hellbomb_portable: "Hellbomb Portable",
+        hover_pack: "Hover Pack",
+        one_true_flag: "One True Flag"
     }
 }

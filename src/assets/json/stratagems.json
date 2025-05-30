@@ -383,5 +383,25 @@
     "name": "WASP",
     "icon": "/StratagemHero/icons/stratagems/StA-X3_W.A.S.P_Launcher.svg",
     "operation": [2,2,1,2,4]
+  },
+  {
+    "name": "grenadier_battlement",
+    "icon": "/StratagemHero/icons/stratagems/grenadier_battlement.svg",
+    "operation": [2,4,2,3,4]
+  },
+  {
+    "name": "hellbomb_portable",
+    "icon": "/StratagemHero/icons/stratagems/hellbomb_portable.svg",
+    "operation": [2,4,1,1,1]
+  },
+  {
+    "name": "hover_pack",
+    "icon": "/StratagemHero/icons/stratagems/hover_pack.svg",
+    "operation": [2,1,1,2,3,4]
+  },
+  {
+    "name": "one_true_flag",
+    "icon": "/StratagemHero/icons/stratagems/one_true_flag.svg",
+    "operation": [2,3,4,4,1]
   }
 ]
