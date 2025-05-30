@@ -105,5 +105,9 @@ export default {
         tectonic_drill: "勘探钻机",
         tesla_tower: "特斯拉塔",
         upload_data: "上传数据",
+        grenadier_battlement: "掷弹兵防卫墙",
+        hellbomb_portable: "便携式地狱火炸弹",
+        hover_pack: "悬浮背包",
+        one_true_flag: "唯一真旗"
     }
 }
