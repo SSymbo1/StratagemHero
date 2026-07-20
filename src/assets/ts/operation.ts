@@ -1,61 +1,62 @@
-import operation from "@/assets/json/operation.json";
+import { OperationSetting } from '@/assets/ts/settings/operation.ts'
 
-/**
- * @enum {number}
- * 箭头方向指令，如果修改这里的方向映射那么战备json文件也要修改
- */
-export enum Direction {
-    UP = 1,
-    DOWN = 2,
-    LEFT = 3,
-    RIGHT = 4,
-    UN_EXIST = -1
+export const Direction = {
+  UP: 1,
+  DOWN: 2,
+  LEFT: 3,
+  RIGHT: 4,
+  UN_EXIST: -1,
+} as const
+
+export type DirectionValue = (typeof Direction)[keyof typeof Direction]
+
+function includesValue<T>(values: readonly T[], value: unknown): value is T {
+  return values.includes(value as T)
 }
 
-/**
- * 封装操作指令类
- * @desc 根据{event}的类型对键盘，触控操作事件封装
- */
 export class Operation {
-    private readonly type: KeyboardEvent | HammerInput
-    private readonly keyboardOp: Array<string>
-    private readonly swipeOp: Array<number>
+  private readonly type: KeyboardEvent | HammerInput
 
-    constructor(type: KeyboardEvent | HammerInput) {
-        this.type = type
-        this.keyboardOp = Object.values(operation.keyboard).flat()
-        this.swipeOp = Object.values(operation.swipe)
+  private readonly keyboardOp: string[]
+
+  private readonly swipeOp: number[]
+
+  constructor(type: KeyboardEvent | HammerInput) {
+    this.type = type
+    this.keyboardOp = Object.values(OperationSetting.keyboard).flat()
+    this.swipeOp = Object.values(OperationSetting.swipe)
+  }
+
+  checkOPEffective = (): boolean => {
+    return (this.type instanceof KeyboardEvent && this.keyboardOp.includes(this.type.key))
+      || ('direction' in this.type && this.swipeOp.includes(this.type.direction))
+  }
+
+  transformOP2Direction = (): DirectionValue => {
+    if (
+      (this.type instanceof KeyboardEvent && includesValue(OperationSetting.keyboard.up, this.type.key))
+      || ('direction' in this.type && this.type.direction === OperationSetting.swipe.up)
+    ) {
+      return Direction.UP
     }
-
-    /**
-     * 根据{event}判断输入操作是否是有效指令
-     * @return {boolean} 是否为有效操作指令
-     */
-    checkOPEffective = (): boolean => {
-        return (this.type instanceof KeyboardEvent && this.keyboardOp.includes(this.type.key)) ||
-            ("direction" in this.type && this.swipeOp.includes(this.type.direction))
+    if (
+      (this.type instanceof KeyboardEvent && includesValue(OperationSetting.keyboard.down, this.type.key))
+      || ('direction' in this.type && this.type.direction === OperationSetting.swipe.down)
+    ) {
+      return Direction.DOWN
     }
-
-    /**
-     * 根据{event}返回输入操作指令的箭头方向
-     * @return {number} 箭头方向指令
-     */
-    transformOP2Direction = (): number => {
-        if ((this.type instanceof KeyboardEvent && operation.keyboard.up.includes(this.type.key)) ||
-            ("direction" in this.type && this.type.direction === operation.swipe.up)) {
-            return Direction.UP
-        } else if ((this.type instanceof KeyboardEvent && operation.keyboard.down.includes(this.type.key)) ||
-            ("direction" in this.type && this.type.direction === operation.swipe.down)) {
-            return Direction.DOWN
-        } else if ((this.type instanceof KeyboardEvent && operation.keyboard.left.includes(this.type.key)) ||
-            ("direction" in this.type && this.type.direction === operation.swipe.left)) {
-            return Direction.LEFT
-        } else if ((this.type instanceof KeyboardEvent && operation.keyboard.right.includes(this.type.key)) ||
-            ("direction" in this.type && this.type.direction === operation.swipe.right)) {
-            return Direction.RIGHT
-        } else {
-            return Direction.UN_EXIST
-        }
+    if (
+      (this.type instanceof KeyboardEvent && includesValue(OperationSetting.keyboard.left, this.type.key))
+      || ('direction' in this.type && this.type.direction === OperationSetting.swipe.left)
+    ) {
+      return Direction.LEFT
     }
-
+    if (
+      (this.type instanceof KeyboardEvent && includesValue(OperationSetting.keyboard.right, this.type.key))
+      || ('direction' in this.type && this.type.direction === OperationSetting.swipe.right)
+    ) {
+      return Direction.RIGHT
+    }
+    return Direction.UN_EXIST
+  }
 }

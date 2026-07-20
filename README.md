@@ -1,7 +1,7 @@
 <div align="center">
 	<h1>StratagemHero
 </h1>
-	<img src="./public/icons/stratagems/eagle_airstrike.svg" width="150" align="center" />
+	<img src="./public/icons/stratagems/eagle_airstrike.svg" width="150" align="center" alt="StratagemHero 图标" />
 	<br/> <br/>
 	<strong>战略配备英雄网页版</strong>
 </div>

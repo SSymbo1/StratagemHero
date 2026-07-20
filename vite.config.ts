@@ -1,17 +1,18 @@
-import {defineConfig} from "vite"
-import vue from "@vitejs/plugin-vue"
-import * as path from "node:path"
+import * as path from 'node:path'
+import tailwindcss from '@tailwindcss/vite'
+import vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-    base: "/StratagemHero",
-    plugins: [vue()],
-    server: {
-        hmr: true
+  base: '/StratagemHero',
+  plugins: [vue(), tailwindcss()],
+  server: {
+    hmr: true,
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
     },
-    resolve: {
-        alias: {
-            "@": path.resolve(__dirname, "./src")
-        }
-    },
+  },
 })

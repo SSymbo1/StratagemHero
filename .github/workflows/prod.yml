@@ -3,9 +3,9 @@ name: StratagemHero
 on:
   # 仅在推送或PR到默认分支时运行。
   push:
-    branches: [ 'master' ]
+    branches: [master]
   pull_request:
-    branches: [ 'master' ]
+    branches: [master]
 
   # 这个选项可以使你手动在 Action tab 页面触发工作流
   workflow_dispatch:
@@ -18,7 +18,7 @@ permissions:
 
 # 允许一个并发的部署
 concurrency:
-  group: 'pages'
+  group: pages
   cancel-in-progress: true
 
 jobs:
@@ -33,13 +33,13 @@ jobs:
         uses: actions/checkout@v4
       - name: Set up pnpm
         uses: pnpm/action-setup@v2
-        with: 
+        with:
           version: 8.15.4
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: 'pnpm'
+          cache: pnpm
       - name: Install dependencies
         run: pnpm install
       - name: Build
@@ -49,7 +49,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: ./dist
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
