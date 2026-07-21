@@ -1,10 +1,15 @@
 import { spawnSync } from 'node:child_process'
 import process from 'node:process'
 
-const packageManager = process.platform === 'win32' ? 'pnpm.cmd' : 'pnpm'
+const isWindows = process.platform === 'win32'
+const packageManager = isWindows ? 'pnpm.cmd' : 'pnpm'
 
 for (const script of ['typecheck', 'build:app']) {
-  const result = spawnSync(packageManager, ['run', script], {
+  const command = isWindows ? `${packageManager} run ${script}` : packageManager
+  const args = isWindows ? [] : ['run', script]
+
+  const result = spawnSync(command, args, {
+    shell: isWindows,
     stdio: 'inherit',
   })
 

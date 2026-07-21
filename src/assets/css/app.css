@@ -10,7 +10,7 @@
   font-family: game;
   font-style: normal;
   font-weight: normal;
-  src: url("/public/font/FS_Sinclair_Medium.otf");
+  src: url("../font/FS_Sinclair_Medium.otf");
 }
 
 html,

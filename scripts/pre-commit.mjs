@@ -47,7 +47,7 @@ if (stagedFiles.length === 0) {
   process.exit(0)
 }
 
-run(pnpmCommand, ['run', 'lint:fix'], {
+run(isWindows ? `${pnpmCommand} run lint:fix` : pnpmCommand, isWindows ? [] : ['run', 'lint:fix'], {
   inherit: true,
   shell: isWindows,
 })

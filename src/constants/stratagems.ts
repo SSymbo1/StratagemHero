@@ -1,10 +1,12 @@
+import { withPublicUrl } from '@/utils/public-url.ts'
+
 /**
  * 所有战备的静态配置表，包含名称、图标与输入序列。
  */
 export const StratagemSetting = [
   {
     name: 'airburst_rocket_launcher',
-    icon: '/StratagemHero/icons/stratagems/airburst_rocket_launcher.svg',
+    icon: withPublicUrl('icons/stratagems/airburst_rocket_launcher.svg'),
     operation: [
       2,
       1,
@@ -15,7 +17,7 @@ export const StratagemSetting = [
   },
   {
     name: 'anti_materiel_rifle',
-    icon: '/StratagemHero/icons/stratagems/anti_materiel_rifle.svg',
+    icon: withPublicUrl('icons/stratagems/anti_materiel_rifle.svg'),
     operation: [
       2,
       3,
@@ -26,7 +28,7 @@ export const StratagemSetting = [
   },
   {
     name: 'anti_personnel_minefield',
-    icon: '/StratagemHero/icons/stratagems/anti_personnel_minefield.svg',
+    icon: withPublicUrl('icons/stratagems/anti_personnel_minefield.svg'),
     operation: [
       2,
       3,
@@ -36,7 +38,7 @@ export const StratagemSetting = [
   },
   {
     name: 'anti_tank_mines',
-    icon: '/StratagemHero/icons/stratagems/anti_tank_mines.svg',
+    icon: withPublicUrl('icons/stratagems/anti_tank_mines.svg'),
     operation: [
       2,
       3,
@@ -46,7 +48,7 @@ export const StratagemSetting = [
   },
   {
     name: 'arc_thrower',
-    icon: '/StratagemHero/icons/stratagems/arc_thrower.svg',
+    icon: withPublicUrl('icons/stratagems/arc_thrower.svg'),
     operation: [
       2,
       4,
@@ -58,7 +60,7 @@ export const StratagemSetting = [
   },
   {
     name: 'autocannon',
-    icon: '/StratagemHero/icons/stratagems/autocannon.svg',
+    icon: withPublicUrl('icons/stratagems/autocannon.svg'),
     operation: [
       2,
       3,
@@ -70,7 +72,7 @@ export const StratagemSetting = [
   },
   {
     name: 'autocannon_sentry',
-    icon: '/StratagemHero/icons/stratagems/autocannon_sentry.svg',
+    icon: withPublicUrl('icons/stratagems/autocannon_sentry.svg'),
     operation: [
       2,
       1,
@@ -82,7 +84,7 @@ export const StratagemSetting = [
   },
   {
     name: 'ballistic_shield_backpack',
-    icon: '/StratagemHero/icons/stratagems/ballistic_shield_backpack.svg',
+    icon: withPublicUrl('icons/stratagems/ballistic_shield_backpack.svg'),
     operation: [
       2,
       3,
@@ -94,7 +96,7 @@ export const StratagemSetting = [
   },
   {
     name: 'commando',
-    icon: '/StratagemHero/icons/stratagems/commando.svg',
+    icon: withPublicUrl('icons/stratagems/commando.svg'),
     operation: [
       2,
       3,
@@ -105,7 +107,7 @@ export const StratagemSetting = [
   },
   {
     name: 'dark_fluid_vessel',
-    icon: '/StratagemHero/icons/stratagems/dark_fluid_vessel.svg',
+    icon: withPublicUrl('icons/stratagems/dark_fluid_vessel.svg'),
     operation: [
       1,
       3,
@@ -117,7 +119,7 @@ export const StratagemSetting = [
   },
   {
     name: 'eagle_110mm_rocket_pods',
-    icon: '/StratagemHero/icons/stratagems/eagle_110mm_rocket_pods.svg',
+    icon: withPublicUrl('icons/stratagems/eagle_110mm_rocket_pods.svg'),
     operation: [
       1,
       4,
@@ -127,7 +129,7 @@ export const StratagemSetting = [
   },
   {
     name: 'eagle_500kg_bomb',
-    icon: '/StratagemHero/icons/stratagems/eagle_500kg_bomb.svg',
+    icon: withPublicUrl('icons/stratagems/eagle_500kg_bomb.svg'),
     operation: [
       1,
       4,
@@ -138,7 +140,7 @@ export const StratagemSetting = [
   },
   {
     name: 'eagle_airstrike',
-    icon: '/StratagemHero/icons/stratagems/eagle_airstrike.svg',
+    icon: withPublicUrl('icons/stratagems/eagle_airstrike.svg'),
     operation: [
       1,
       4,
@@ -148,7 +150,7 @@ export const StratagemSetting = [
   },
   {
     name: 'eagle_cluster_bomb',
-    icon: '/StratagemHero/icons/stratagems/eagle_cluster_bomb.svg',
+    icon: withPublicUrl('icons/stratagems/eagle_cluster_bomb.svg'),
     operation: [
       1,
       4,
@@ -159,7 +161,7 @@ export const StratagemSetting = [
   },
   {
     name: 'eagle_napalm_airstrike',
-    icon: '/StratagemHero/icons/stratagems/eagle_napalm_airstrike.svg',
+    icon: withPublicUrl('icons/stratagems/eagle_napalm_airstrike.svg'),
     operation: [
       1,
       4,
@@ -169,7 +171,7 @@ export const StratagemSetting = [
   },
   {
     name: 'eagle_rearm',
-    icon: '/StratagemHero/icons/stratagems/eagle_rearm.svg',
+    icon: withPublicUrl('icons/stratagems/eagle_rearm.svg'),
     operation: [
       1,
       1,
@@ -180,7 +182,7 @@ export const StratagemSetting = [
   },
   {
     name: 'eagle_smoke_strike',
-    icon: '/StratagemHero/icons/stratagems/eagle_smoke_strike.svg',
+    icon: withPublicUrl('icons/stratagems/eagle_smoke_strike.svg'),
     operation: [
       1,
       4,
@@ -190,7 +192,7 @@ export const StratagemSetting = [
   },
   {
     name: 'eagle_strafing_run',
-    icon: '/StratagemHero/icons/stratagems/eagle_strafing_run.svg',
+    icon: withPublicUrl('icons/stratagems/eagle_strafing_run.svg'),
     operation: [
       1,
       4,
@@ -199,7 +201,7 @@ export const StratagemSetting = [
   },
   {
     name: 'emancipator_exosuit',
-    icon: '/StratagemHero/icons/stratagems/emancipator_exosuit.svg',
+    icon: withPublicUrl('icons/stratagems/emancipator_exosuit.svg'),
     operation: [
       3,
       2,
@@ -212,7 +214,7 @@ export const StratagemSetting = [
   },
   {
     name: 'ems_mortar_sentry',
-    icon: '/StratagemHero/icons/stratagems/ems_mortar_sentry.svg',
+    icon: withPublicUrl('icons/stratagems/ems_mortar_sentry.svg'),
     operation: [
       2,
       1,
@@ -223,7 +225,7 @@ export const StratagemSetting = [
   },
   {
     name: 'expendable_anti_tank',
-    icon: '/StratagemHero/icons/stratagems/expendable_anti_tank.svg',
+    icon: withPublicUrl('icons/stratagems/expendable_anti_tank.svg'),
     operation: [
       2,
       2,
@@ -234,7 +236,7 @@ export const StratagemSetting = [
   },
   {
     name: 'flamethrower',
-    icon: '/StratagemHero/icons/stratagems/flamethrower.svg',
+    icon: withPublicUrl('icons/stratagems/flamethrower.svg'),
     operation: [
       2,
       3,
@@ -245,7 +247,7 @@ export const StratagemSetting = [
   },
   {
     name: 'gatling_sentry',
-    icon: '/StratagemHero/icons/stratagems/gatling_sentry.svg',
+    icon: withPublicUrl('icons/stratagems/gatling_sentry.svg'),
     operation: [
       2,
       1,
@@ -255,7 +257,7 @@ export const StratagemSetting = [
   },
   {
     name: 'grenade_launcher',
-    icon: '/StratagemHero/icons/stratagems/grenade_launcher.svg',
+    icon: withPublicUrl('icons/stratagems/grenade_launcher.svg'),
     operation: [
       2,
       3,
@@ -266,7 +268,7 @@ export const StratagemSetting = [
   },
   {
     name: 'guard_dog',
-    icon: '/StratagemHero/icons/stratagems/guard_dog.svg',
+    icon: withPublicUrl('icons/stratagems/guard_dog.svg'),
     operation: [
       2,
       1,
@@ -278,7 +280,7 @@ export const StratagemSetting = [
   },
   {
     name: 'guard_dog_dog_breath',
-    icon: '/StratagemHero/icons/stratagems/guard_dog_dog_breath.svg',
+    icon: withPublicUrl('icons/stratagems/guard_dog_dog_breath.svg'),
     operation: [
       2,
       1,
@@ -290,7 +292,7 @@ export const StratagemSetting = [
   },
   {
     name: 'guard_dog_rover',
-    icon: '/StratagemHero/icons/stratagems/guard_dog_rover.svg',
+    icon: withPublicUrl('icons/stratagems/guard_dog_rover.svg'),
     operation: [
       2,
       1,
@@ -302,7 +304,7 @@ export const StratagemSetting = [
   },
   {
     name: 'heavy_machine_gun',
-    icon: '/StratagemHero/icons/stratagems/heavy_machine_gun.svg',
+    icon: withPublicUrl('icons/stratagems/heavy_machine_gun.svg'),
     operation: [
       2,
       3,
@@ -313,7 +315,7 @@ export const StratagemSetting = [
   },
   {
     name: 'hellbomb',
-    icon: '/StratagemHero/icons/stratagems/hellbomb.svg',
+    icon: withPublicUrl('icons/stratagems/hellbomb.svg'),
     operation: [
       2,
       1,
@@ -327,7 +329,7 @@ export const StratagemSetting = [
   },
   {
     name: 'hive_breaker_drill',
-    icon: '/StratagemHero/icons/stratagems/hive_breaker_drill.svg',
+    icon: withPublicUrl('icons/stratagems/hive_breaker_drill.svg'),
     operation: [
       3,
       1,
@@ -339,7 +341,7 @@ export const StratagemSetting = [
   },
   {
     name: 'hmg_emplacement',
-    icon: '/StratagemHero/icons/stratagems/hmg_emplacement.svg',
+    icon: withPublicUrl('icons/stratagems/hmg_emplacement.svg'),
     operation: [
       2,
       1,
@@ -351,7 +353,7 @@ export const StratagemSetting = [
   },
   {
     name: 'incendiary_mines',
-    icon: '/StratagemHero/icons/stratagems/incendiary_mines.svg',
+    icon: withPublicUrl('icons/stratagems/incendiary_mines.svg'),
     operation: [
       2,
       3,
@@ -361,7 +363,7 @@ export const StratagemSetting = [
   },
   {
     name: 'jump_pack',
-    icon: '/StratagemHero/icons/stratagems/jump_pack.svg',
+    icon: withPublicUrl('icons/stratagems/jump_pack.svg'),
     operation: [
       2,
       1,
@@ -372,7 +374,7 @@ export const StratagemSetting = [
   },
   {
     name: 'laser_cannon',
-    icon: '/StratagemHero/icons/stratagems/laser_cannon.svg',
+    icon: withPublicUrl('icons/stratagems/laser_cannon.svg'),
     operation: [
       2,
       3,
@@ -383,7 +385,7 @@ export const StratagemSetting = [
   },
   {
     name: 'machine_gun',
-    icon: '/StratagemHero/icons/stratagems/machine_gun.svg',
+    icon: withPublicUrl('icons/stratagems/machine_gun.svg'),
     operation: [
       2,
       3,
@@ -394,7 +396,7 @@ export const StratagemSetting = [
   },
   {
     name: 'machine_gun_sentry',
-    icon: '/StratagemHero/icons/stratagems/machine_gun_sentry.svg',
+    icon: withPublicUrl('icons/stratagems/machine_gun_sentry.svg'),
     operation: [
       2,
       1,
@@ -405,7 +407,7 @@ export const StratagemSetting = [
   },
   {
     name: 'mortar_sentry',
-    icon: '/StratagemHero/icons/stratagems/mortar_sentry.svg',
+    icon: withPublicUrl('icons/stratagems/mortar_sentry.svg'),
     operation: [
       2,
       1,
@@ -416,7 +418,7 @@ export const StratagemSetting = [
   },
   {
     name: 'orbital_120mm_he_barrage',
-    icon: '/StratagemHero/icons/stratagems/orbital_120mm_he_barrage.svg',
+    icon: withPublicUrl('icons/stratagems/orbital_120mm_he_barrage.svg'),
     operation: [
       4,
       4,
@@ -428,7 +430,7 @@ export const StratagemSetting = [
   },
   {
     name: 'orbital_380mm_he_barrage',
-    icon: '/StratagemHero/icons/stratagems/orbital_380mm_he_barrage.svg',
+    icon: withPublicUrl('icons/stratagems/orbital_380mm_he_barrage.svg'),
     operation: [
       4,
       2,
@@ -441,7 +443,7 @@ export const StratagemSetting = [
   },
   {
     name: 'orbital_airburst_strike',
-    icon: '/StratagemHero/icons/stratagems/orbital_airburst_strike.svg',
+    icon: withPublicUrl('icons/stratagems/orbital_airburst_strike.svg'),
     operation: [
       4,
       4,
@@ -450,7 +452,7 @@ export const StratagemSetting = [
   },
   {
     name: 'orbital_ems_strike',
-    icon: '/StratagemHero/icons/stratagems/orbital_ems_strike.svg',
+    icon: withPublicUrl('icons/stratagems/orbital_ems_strike.svg'),
     operation: [
       4,
       4,
@@ -460,7 +462,7 @@ export const StratagemSetting = [
   },
   {
     name: 'orbital_gas_strike',
-    icon: '/StratagemHero/icons/stratagems/orbital_gas_strike.svg',
+    icon: withPublicUrl('icons/stratagems/orbital_gas_strike.svg'),
     operation: [
       4,
       4,
@@ -470,7 +472,7 @@ export const StratagemSetting = [
   },
   {
     name: 'orbital_gatling_barrage',
-    icon: '/StratagemHero/icons/stratagems/orbital_gatling_barrage.svg',
+    icon: withPublicUrl('icons/stratagems/orbital_gatling_barrage.svg'),
     operation: [
       4,
       2,
@@ -481,7 +483,7 @@ export const StratagemSetting = [
   },
   {
     name: 'orbital_illumination_flare',
-    icon: '/StratagemHero/icons/stratagems/orbital_illumination_flare.svg',
+    icon: withPublicUrl('icons/stratagems/orbital_illumination_flare.svg'),
     operation: [
       4,
       4,
@@ -491,7 +493,7 @@ export const StratagemSetting = [
   },
   {
     name: 'orbital_laser',
-    icon: '/StratagemHero/icons/stratagems/orbital_laser.svg',
+    icon: withPublicUrl('icons/stratagems/orbital_laser.svg'),
     operation: [
       4,
       2,
@@ -502,7 +504,7 @@ export const StratagemSetting = [
   },
   {
     name: 'orbital_napalm_barrage',
-    icon: '/StratagemHero/icons/stratagems/orbital_napalm_barrage.svg',
+    icon: withPublicUrl('icons/stratagems/orbital_napalm_barrage.svg'),
     operation: [
       4,
       4,
@@ -514,7 +516,7 @@ export const StratagemSetting = [
   },
   {
     name: 'orbital_precision_strike',
-    icon: '/StratagemHero/icons/stratagems/orbital_precision_strike.svg',
+    icon: withPublicUrl('icons/stratagems/orbital_precision_strike.svg'),
     operation: [
       4,
       4,
@@ -523,7 +525,7 @@ export const StratagemSetting = [
   },
   {
     name: 'orbital_railcannon_strike',
-    icon: '/StratagemHero/icons/stratagems/orbital_railcannon_strike.svg',
+    icon: withPublicUrl('icons/stratagems/orbital_railcannon_strike.svg'),
     operation: [
       4,
       1,
@@ -534,7 +536,7 @@ export const StratagemSetting = [
   },
   {
     name: 'orbital_smoke_strike',
-    icon: '/StratagemHero/icons/stratagems/orbital_smoke_strike.svg',
+    icon: withPublicUrl('icons/stratagems/orbital_smoke_strike.svg'),
     operation: [
       4,
       4,
@@ -544,7 +546,7 @@ export const StratagemSetting = [
   },
   {
     name: 'orbital_walking_barrage',
-    icon: '/StratagemHero/icons/stratagems/orbital_walking_barrage.svg',
+    icon: withPublicUrl('icons/stratagems/orbital_walking_barrage.svg'),
     operation: [
       4,
       2,
@@ -556,7 +558,7 @@ export const StratagemSetting = [
   },
   {
     name: 'patriot_exosuit',
-    icon: '/StratagemHero/icons/stratagems/patriot_exosuit.svg',
+    icon: withPublicUrl('icons/stratagems/patriot_exosuit.svg'),
     operation: [
       3,
       2,
@@ -569,7 +571,7 @@ export const StratagemSetting = [
   },
   {
     name: 'prospecting_drill',
-    icon: '/StratagemHero/icons/stratagems/prospecting_drill.svg',
+    icon: withPublicUrl('icons/stratagems/prospecting_drill.svg'),
     operation: [
       2,
       2,
@@ -581,7 +583,7 @@ export const StratagemSetting = [
   },
   {
     name: 'quasar_cannon',
-    icon: '/StratagemHero/icons/stratagems/quasar_cannon.svg',
+    icon: withPublicUrl('icons/stratagems/quasar_cannon.svg'),
     operation: [
       2,
       2,
@@ -592,7 +594,7 @@ export const StratagemSetting = [
   },
   {
     name: 'railgun',
-    icon: '/StratagemHero/icons/stratagems/railgun.svg',
+    icon: withPublicUrl('icons/stratagems/railgun.svg'),
     operation: [
       2,
       4,
@@ -604,7 +606,7 @@ export const StratagemSetting = [
   },
   {
     name: 'recoilless_rifle',
-    icon: '/StratagemHero/icons/stratagems/recoilless_rifle.svg',
+    icon: withPublicUrl('icons/stratagems/recoilless_rifle.svg'),
     operation: [
       2,
       3,
@@ -615,7 +617,7 @@ export const StratagemSetting = [
   },
   {
     name: 'reinforce',
-    icon: '/StratagemHero/icons/stratagems/reinforce.svg',
+    icon: withPublicUrl('icons/stratagems/reinforce.svg'),
     operation: [
       1,
       2,
@@ -626,7 +628,7 @@ export const StratagemSetting = [
   },
   {
     name: 'resupply',
-    icon: '/StratagemHero/icons/stratagems/resupply.svg',
+    icon: withPublicUrl('icons/stratagems/resupply.svg'),
     operation: [
       2,
       2,
@@ -636,7 +638,7 @@ export const StratagemSetting = [
   },
   {
     name: 'rocket_sentry',
-    icon: '/StratagemHero/icons/stratagems/rocket_sentry.svg',
+    icon: withPublicUrl('icons/stratagems/rocket_sentry.svg'),
     operation: [
       2,
       1,
@@ -647,7 +649,7 @@ export const StratagemSetting = [
   },
   {
     name: 'seaf_artillery',
-    icon: '/StratagemHero/icons/stratagems/seaf_artillery.svg',
+    icon: withPublicUrl('icons/stratagems/seaf_artillery.svg'),
     operation: [
       4,
       1,
@@ -657,7 +659,7 @@ export const StratagemSetting = [
   },
   {
     name: 'seismic_probe',
-    icon: '/StratagemHero/icons/stratagems/seismic_probe.svg',
+    icon: withPublicUrl('icons/stratagems/seismic_probe.svg'),
     operation: [
       1,
       1,
@@ -669,7 +671,7 @@ export const StratagemSetting = [
   },
   {
     name: 'shield_generator_pack',
-    icon: '/StratagemHero/icons/stratagems/shield_generator_pack.svg',
+    icon: withPublicUrl('icons/stratagems/shield_generator_pack.svg'),
     operation: [
       2,
       1,
@@ -681,7 +683,7 @@ export const StratagemSetting = [
   },
   {
     name: 'shield_generator_relay',
-    icon: '/StratagemHero/icons/stratagems/shield_generator_relay.svg',
+    icon: withPublicUrl('icons/stratagems/shield_generator_relay.svg'),
     operation: [
       2,
       2,
@@ -693,7 +695,7 @@ export const StratagemSetting = [
   },
   {
     name: 'sos_beacon',
-    icon: '/StratagemHero/icons/stratagems/sos_beacon.svg',
+    icon: withPublicUrl('icons/stratagems/sos_beacon.svg'),
     operation: [
       1,
       2,
@@ -703,7 +705,7 @@ export const StratagemSetting = [
   },
   {
     name: 'spear',
-    icon: '/StratagemHero/icons/stratagems/spear.svg',
+    icon: withPublicUrl('icons/stratagems/spear.svg'),
     operation: [
       2,
       2,
@@ -714,7 +716,7 @@ export const StratagemSetting = [
   },
   {
     name: 'stalwart',
-    icon: '/StratagemHero/icons/stratagems/stalwart.svg',
+    icon: withPublicUrl('icons/stratagems/stalwart.svg'),
     operation: [
       2,
       3,
@@ -726,7 +728,7 @@ export const StratagemSetting = [
   },
   {
     name: 'sterilizer',
-    icon: '/StratagemHero/icons/stratagems/sterilizer.svg',
+    icon: withPublicUrl('icons/stratagems/sterilizer.svg'),
     operation: [
       2,
       3,
@@ -737,7 +739,7 @@ export const StratagemSetting = [
   },
   {
     name: 'super_earth_flag',
-    icon: '/StratagemHero/icons/stratagems/super_earth_flag.svg',
+    icon: withPublicUrl('icons/stratagems/super_earth_flag.svg'),
     operation: [
       2,
       1,
@@ -747,7 +749,7 @@ export const StratagemSetting = [
   },
   {
     name: 'supply_pack',
-    icon: '/StratagemHero/icons/stratagems/supply_pack.svg',
+    icon: withPublicUrl('icons/stratagems/supply_pack.svg'),
     operation: [
       2,
       3,
@@ -759,7 +761,7 @@ export const StratagemSetting = [
   },
   {
     name: 'tectonic_drill',
-    icon: '/StratagemHero/icons/stratagems/tectonic_drill.svg',
+    icon: withPublicUrl('icons/stratagems/tectonic_drill.svg'),
     operation: [
       2,
       2,
@@ -771,7 +773,7 @@ export const StratagemSetting = [
   },
   {
     name: 'tesla_tower',
-    icon: '/StratagemHero/icons/stratagems/tesla_tower.svg',
+    icon: withPublicUrl('icons/stratagems/tesla_tower.svg'),
     operation: [
       2,
       1,
@@ -783,7 +785,7 @@ export const StratagemSetting = [
   },
   {
     name: 'upload_data',
-    icon: '/StratagemHero/icons/stratagems/upload_data.svg',
+    icon: withPublicUrl('icons/stratagems/upload_data.svg'),
     operation: [
       3,
       4,
@@ -794,7 +796,7 @@ export const StratagemSetting = [
   },
   {
     name: 'anti_tank_emplacement',
-    icon: '/StratagemHero/icons/stratagems/anti_tank_emplacement.svg',
+    icon: withPublicUrl('icons/stratagems/anti_tank_emplacement.svg'),
     operation: [
       2,
       1,
@@ -806,7 +808,7 @@ export const StratagemSetting = [
   },
   {
     name: 'directional_shield',
-    icon: '/StratagemHero/icons/stratagems/directional_shield.svg',
+    icon: withPublicUrl('icons/stratagems/directional_shield.svg'),
     operation: [
       2,
       1,
@@ -818,7 +820,7 @@ export const StratagemSetting = [
   },
   {
     name: 'flame_sentry',
-    icon: '/StratagemHero/icons/stratagems/flame_sentry.svg',
+    icon: withPublicUrl('icons/stratagems/flame_sentry.svg'),
     operation: [
       2,
       1,
@@ -830,7 +832,7 @@ export const StratagemSetting = [
   },
   {
     name: 'Fast_Recon_Vehicle',
-    icon: '/StratagemHero/icons/stratagems/Fast_Recon_Vehicle.svg',
+    icon: withPublicUrl('icons/stratagems/Fast_Recon_Vehicle.svg'),
     operation: [
       3,
       2,
@@ -843,7 +845,7 @@ export const StratagemSetting = [
   },
   {
     name: 'Gas_Mine',
-    icon: '/StratagemHero/icons/stratagems/Gas_Mine.svg',
+    icon: withPublicUrl('icons/stratagems/Gas_Mine.svg'),
     operation: [
       2,
       3,
@@ -853,7 +855,7 @@ export const StratagemSetting = [
   },
   {
     name: 'WASP',
-    icon: '/StratagemHero/icons/stratagems/StA-X3_W.A.S.P_Launcher.svg',
+    icon: withPublicUrl('icons/stratagems/StA-X3_W.A.S.P_Launcher.svg'),
     operation: [
       2,
       2,
@@ -864,7 +866,7 @@ export const StratagemSetting = [
   },
   {
     name: 'grenadier_battlement',
-    icon: '/StratagemHero/icons/stratagems/grenadier_battlement.svg',
+    icon: withPublicUrl('icons/stratagems/grenadier_battlement.svg'),
     operation: [
       2,
       4,
@@ -875,7 +877,7 @@ export const StratagemSetting = [
   },
   {
     name: 'hellbomb_portable',
-    icon: '/StratagemHero/icons/stratagems/hellbomb_portable.svg',
+    icon: withPublicUrl('icons/stratagems/hellbomb_portable.svg'),
     operation: [
       2,
       4,
@@ -886,7 +888,7 @@ export const StratagemSetting = [
   },
   {
     name: 'hover_pack',
-    icon: '/StratagemHero/icons/stratagems/hover_pack.svg',
+    icon: withPublicUrl('icons/stratagems/hover_pack.svg'),
     operation: [
       2,
       1,
@@ -898,7 +900,7 @@ export const StratagemSetting = [
   },
   {
     name: 'one_true_flag',
-    icon: '/StratagemHero/icons/stratagems/one_true_flag.svg',
+    icon: withPublicUrl('icons/stratagems/one_true_flag.svg'),
     operation: [
       2,
       3,
