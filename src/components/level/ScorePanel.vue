@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * 关卡页左右两侧的分数或回合展示面板。
+ */
 defineProps<{
   label: string
   value: string | number

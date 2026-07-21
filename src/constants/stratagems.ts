@@ -1,3 +1,6 @@
+/**
+ * 所有战备的静态配置表，包含名称、图标与输入序列。
+ */
 export const StratagemSetting = [
   {
     name: 'airburst_rocket_launcher',

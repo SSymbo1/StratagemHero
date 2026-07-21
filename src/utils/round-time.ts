@@ -1,11 +1,17 @@
 import type { Stratagem } from '@/types/stratagem.ts'
 import { Game } from '@/constants/game.ts'
 
+/**
+ * 单回合时间与加时计算结果。
+ */
 export interface RoundTime {
   time: number
   plus: number
 }
 
+/**
+ * 按当前回合与战备长度计算本回合基础时间和加时。
+ */
 export function roundTimeCalculator(stratagems: Stratagem[], round: number): RoundTime {
   if (round < Game.DIFFICULT_ROUND) {
     return {

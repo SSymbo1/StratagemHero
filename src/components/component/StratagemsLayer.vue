@@ -3,6 +3,9 @@ import type { CSSProperties, Ref } from 'vue'
 import type { Stratagem } from '@/types/stratagem.ts'
 import { computed, ref, watch } from 'vue'
 
+/**
+ * 展示当前回合战备图标，并根据剩余进度调整高亮效果。
+ */
 const props = withDefaults(defineProps<{
   stratagems?: readonly Stratagem[]
   ampleTime?: boolean
@@ -21,6 +24,7 @@ const showLabel = computed(() => stratagems.value.slice(0, 4))
 const filterStyle: Ref<CSSProperties> = ref({})
 
 function removeFirstStratagem() {
+  // 当前战备完成后，移除首项并在耗尽时通知父组件。
   stratagems.value.shift()
   if (stratagems.value.length === 0) {
     emit('clearUp')
@@ -28,6 +32,7 @@ function removeFirstStratagem() {
 }
 
 function stratagemsLayerFilter(percent: number) {
+  // 根据输入完成度逐步增强滤镜强度。
   if (percent <= 0) {
     filterStyle.value = {}
   }
@@ -46,6 +51,7 @@ function stratagemsLayerFilter(percent: number) {
 }
 
 watch(showLabel, (newValue) => {
+  // 让父组件始终拿到当前展示区的首个战备。
   if (newValue.length > 0) {
     emit('nowStratagem', newValue[0])
   }

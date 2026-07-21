@@ -22,6 +22,9 @@ import { Operation } from '@/utils/operation-parser.ts'
 import { roundTimeCalculator } from '@/utils/round-time.ts'
 import { randomStratagems } from '@/utils/stratagem-random.ts'
 
+/**
+ * 创建回合结算展示数据，保持模板中的字段结构稳定。
+ */
 function createRoundResult(): ResultItem[] {
   return GameLabelSetting.roundLabel.map(item => ({ ...item }))
 }
@@ -63,6 +66,7 @@ const dynamicLabelColor = computed(() => {
   } as CSSProperties
 })
 
+// 统一处理键盘与手势输入，只在有效操作时累计序列。
 function checkInput(event: KeyboardEvent | HammerInput) {
   const operation = new Operation(event)
 
@@ -73,6 +77,7 @@ function checkInput(event: KeyboardEvent | HammerInput) {
 }
 
 function readyForRoundBegin() {
+  // 新回合开始前先重置状态，再延迟开启输入与背景音乐。
   playEffect(Audio.GET_READY)
   perfectRound.value = true
   isRoundResult.value = false
@@ -96,6 +101,7 @@ function readyForRoundBegin() {
 }
 
 function timeUp() {
+  // 时间耗尽时写入本局成绩并跳转到排行榜。
   stopBackground()
 
   const useScoreStore = useScore()
@@ -104,6 +110,7 @@ function timeUp() {
 }
 
 function roundStratagemsRunOut() {
+  // 当前回合所有战备完成后，计算奖励并展示结算列表。
   stopBackground()
   stopListening()
 
@@ -141,11 +148,13 @@ function roundStratagemsRunOut() {
 }
 
 function currentStratagem(stratagem: Stratagem) {
+  // 始终把当前展示的战备同步给模板与箭头输入层。
   localStratagemName.value = stratagem.name
   localStratagemArrow.value = stratagem.operation
 }
 
 function arrowCheckSuccess() {
+  // 成功输入后补时、加分并移除已完成战备。
   timer.value?.addTime()
   stratagemsLayer.value?.removeFirstStratagem()
   score.value += Game.PER_SCORE
@@ -154,20 +163,24 @@ function arrowCheckSuccess() {
 }
 
 function arrowCheckError() {
+  // 错误输入仅清空当前序列，并终止完美回合判定。
   inputOperation.value = []
   perfectRound.value = false
 }
 
 function deliverCommandPercent(percent: number) {
+  // 将输入进度同步给战备列表滤镜。
   stratagemsLayer.value?.stratagemsLayerFilter(percent)
 }
 
 function timeNearlyRunOut() {
+  // 进入危险时间后，计时条和战备边框同时变色。
   labelColor.value = TimerLayer.DANGER_TIME
   remainTime.value = false
 }
 
 function ampleTime() {
+  // 回到安全区时恢复默认颜色。
   labelColor.value = TimerLayer.SAFE_TIME
   remainTime.value = true
 }

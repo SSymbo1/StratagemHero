@@ -9,6 +9,7 @@ import { Operation } from '@/utils/operation-parser.ts'
 
 const { preloadAudio } = useAudio()
 
+// 仅接受有效输入，预加载成功后进入关卡页。
 async function startGame(event: KeyboardEvent | HammerInput) {
   if (new Operation(event).checkOPEffective() && await preloadAudio()) {
     await router.replace('/level')

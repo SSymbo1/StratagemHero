@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import type { ResultItem } from '@/types/result.ts'
 
+/**
+ * 逐条展示回合或排行榜结果。
+ */
 defineProps<{
   items: ResultItem[]
   showIndexes: number[]

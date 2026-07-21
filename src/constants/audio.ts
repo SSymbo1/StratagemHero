@@ -1,3 +1,6 @@
+/**
+ * 游戏音频资源路径表，供预加载和播放逻辑统一引用。
+ */
 export const Audio = {
   PRESS_KEY: '/StratagemHero/audio/key_press.ogg',
   WRONG_KEY_PRESS: '/StratagemHero/audio/wrong_key_press.ogg',
@@ -11,4 +14,7 @@ export const Audio = {
   COMPLETE_4: '/StratagemHero/audio/round_complete_4.mp3',
 } as const
 
+/**
+ * 音频资源路径字面量类型。
+ */
 export type AudioValue = (typeof Audio)[keyof typeof Audio]

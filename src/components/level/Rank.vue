@@ -13,6 +13,9 @@ import { useResultReveal } from '@/hooks/use-result-reveal.ts'
 import router from '@/router'
 import { useScore } from '@/store/base/score.ts'
 
+/**
+ * 创建排行榜展示数据，结构与回合结算保持一致。
+ */
 function createRankResult(): ResultItem[] {
   return GameLabelSetting.rankLabel.map(item => ({ ...item }))
 }
@@ -28,6 +31,7 @@ function backHome() {
 const { targetRef, startListening } = useGameInput(backHome)
 
 function calculateRoundData() {
+  // 先刷新历史分数，再把本局与历史结果写入展示列表。
   const scoreStore = useScore()
   const nextHistoryScore = Math.max(scoreStore.score.lastScore, scoreStore.score.historyScore)
   const nextHistoryRound = Math.max(scoreStore.score.lastRound, scoreStore.score.historyRound)

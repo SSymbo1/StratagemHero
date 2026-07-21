@@ -5,6 +5,7 @@ import router from './router'
 import pinia from './store'
 import '@/assets/css/app.css'
 
+// 先注册路由、状态和国际化，再挂载根实例。
 const app = createApp(App)
 app.use(router)
 app.use(pinia)

@@ -1,3 +1,6 @@
+/**
+ * 结果面板与排行榜面板的文案键与默认分数字段。
+ */
 export const GameLabelSetting = {
   roundLabel: [
     {

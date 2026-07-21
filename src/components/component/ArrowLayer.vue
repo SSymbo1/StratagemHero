@@ -5,6 +5,9 @@ import { Audio } from '@/constants/audio.ts'
 import { Direction } from '@/constants/direction.ts'
 import { useAudio } from '@/hooks/use-audio.ts'
 
+/**
+ * 展示并校验当前战备输入序列的方向箭头层。
+ */
 const props = withDefaults(defineProps<{
   arrow?: readonly number[]
   operation?: readonly number[]
@@ -33,6 +36,7 @@ function fillArrowColor(index: number): CSSProperties | undefined {
 }
 
 watch(input, (newVal) => {
+  // 每次输入变化时重新校验前缀匹配情况。
   if (newVal.length > 0) {
     errorIndex.value = []
   }
@@ -44,9 +48,11 @@ watch(input, (newVal) => {
   for (let i = 0; i < min; i++) {
     if (stratagem.value[i] !== newVal[i]) {
       flag = false
+      // 记录当前及之前的箭头，便于高亮整段错误输入。
       for (let e = 0; e <= i; e++) {
         errorIndex.value.push(e)
       }
+      // 短暂清理 SVG 颜色，避免错误状态残留。
       setTimeout(() => {
         const svgElements = document.getElementsByTagName('path')
         for (let s = 0; s < svgElements.length; s++) {

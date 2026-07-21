@@ -2,6 +2,9 @@ import type { Stratagem } from '@/types/stratagem.ts'
 import { Game } from '@/constants/game.ts'
 import { StratagemSetting } from '@/constants/stratagems.ts'
 
+/**
+ * 根据回合数打乱并抽取当轮战备列表。
+ */
 export function randomStratagems(round: number): Stratagem[] {
   let baseRoundStratagems = Game.STRATAGEMS
 

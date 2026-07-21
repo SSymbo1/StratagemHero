@@ -1,3 +1,6 @@
+/**
+ * 键盘、滑动与手柄输入的映射配置。
+ */
 export const OperationSetting = {
   keyboard: {
     up: [

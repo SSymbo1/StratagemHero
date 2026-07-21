@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * 首页与准备页共用的标题区块。
+ */
 withDefaults(defineProps<{
   title: string
   subtitle?: string
