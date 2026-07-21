@@ -47,7 +47,7 @@ jobs:
       - name: Package release artifact
         env:
           RELEASE_ARCHIVE: StratagemHero-pr-${{ github.event.pull_request.number }}.zip
-        run: zip -r "$RELEASE_ARCHIVE" dist
+        run: zip -r "$RELEASE_ARCHIVE" dist nginx.conf
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v6
@@ -63,6 +63,7 @@ jobs:
           name: release-package
           path: |
             StratagemHero-pr-${{ github.event.pull_request.number }}.zip
+            nginx.conf
             release-notes.md
           if-no-files-found: error
           retention-days: 1
@@ -101,7 +102,8 @@ jobs:
       - name: Create or update release
         env:
           GH_TOKEN: ${{ github.token }}
-          RELEASE_ASSET: release-package/StratagemHero-pr-${{ github.event.pull_request.number }}.zip
+          RELEASE_ARCHIVE: release-package/StratagemHero-pr-${{ github.event.pull_request.number }}.zip
+          NGINX_CONFIG: release-package/nginx.conf
           RELEASE_NOTES: release-package/release-notes.md
           RELEASE_TAG: pr-${{ github.event.pull_request.number }}
           RELEASE_TARGET: ${{ github.event.pull_request.merge_commit_sha }}
@@ -113,11 +115,11 @@ jobs:
               --repo "$GITHUB_REPOSITORY" \
               --title "$RELEASE_TITLE" \
               --notes-file "$RELEASE_NOTES"
-            gh release upload "$RELEASE_TAG" "$RELEASE_ASSET" \
+            gh release upload "$RELEASE_TAG" "$RELEASE_ARCHIVE" "$NGINX_CONFIG" \
               --repo "$GITHUB_REPOSITORY" \
               --clobber
           else
-            gh release create "$RELEASE_TAG" "$RELEASE_ASSET" \
+            gh release create "$RELEASE_TAG" "$RELEASE_ARCHIVE" "$NGINX_CONFIG" \
               --repo "$GITHUB_REPOSITORY" \
               --target "$RELEASE_TARGET" \
               --title "$RELEASE_TITLE" \
