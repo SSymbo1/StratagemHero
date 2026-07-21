@@ -1,14 +1,6 @@
-import { OperationSetting } from '@/assets/ts/settings/operation.ts'
-
-export const Direction = {
-  UP: 1,
-  DOWN: 2,
-  LEFT: 3,
-  RIGHT: 4,
-  UN_EXIST: -1,
-} as const
-
-export type DirectionValue = (typeof Direction)[keyof typeof Direction]
+import type { DirectionValue } from '@/constants/direction.ts'
+import { Direction } from '@/constants/direction.ts'
+import { OperationSetting } from '@/constants/operation.ts'
 
 function includesValue<T>(values: readonly T[], value: unknown): value is T {
   return values.includes(value as T)

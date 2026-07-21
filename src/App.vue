@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { initApplicationLayout, initApplicationMode } from '@/assets/ts/application_init.ts'
+import { initApplicationLayout, initApplicationMode } from '@/utils/application.ts'
 
 onMounted(() => {
   initApplicationLayout()

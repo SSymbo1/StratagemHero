@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
 import { computed, ref, watch } from 'vue'
-import { Audio, MediaPlayer } from '@/assets/ts/media_player.ts'
-import { Direction } from '@/assets/ts/operation.ts'
+import { Audio } from '@/constants/audio.ts'
+import { Direction } from '@/constants/direction.ts'
+import { useAudio } from '@/hooks/use-audio.ts'
 
 const props = withDefaults(defineProps<{
   arrow?: readonly number[]
@@ -21,6 +22,7 @@ const emit = defineEmits<{
 const stratagem = computed(() => props.arrow)
 const input = computed(() => props.operation)
 const errorIndex = ref<number[]>([])
+const { playEffect } = useAudio()
 
 function fillArrowColor(index: number): CSSProperties | undefined {
   if (input.value[index] === stratagem.value[index]) {
@@ -51,7 +53,7 @@ watch(input, (newVal) => {
           svgElements[s].style.fill = '#ffffff'
         }
       }, 100)
-      new MediaPlayer(false, 1).audioPlay(Audio.WRONG_KEY_PRESS).play()
+      playEffect(Audio.WRONG_KEY_PRESS, 1)
       emit('error')
       return
     }

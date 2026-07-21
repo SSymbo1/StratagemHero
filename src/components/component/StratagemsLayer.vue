@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { CSSProperties, Ref } from 'vue'
-import type { Stratagem } from '@/assets/ts/round_stratagems.ts'
+import type { Stratagem } from '@/types/stratagem.ts'
 import { computed, ref, watch } from 'vue'
 
 const props = withDefaults(defineProps<{

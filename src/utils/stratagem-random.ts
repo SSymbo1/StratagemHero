@@ -1,11 +1,6 @@
-import { Game } from '@/assets/ts/global.ts'
-import { StratagemSetting } from '@/assets/ts/settings/stratagems.ts'
-
-export interface Stratagem {
-  readonly name: string
-  readonly icon: string
-  readonly operation: readonly number[]
-}
+import type { Stratagem } from '@/types/stratagem.ts'
+import { Game } from '@/constants/game.ts'
+import { StratagemSetting } from '@/constants/stratagems.ts'
 
 export function randomStratagems(round: number): Stratagem[] {
   let baseRoundStratagems = Game.STRATAGEMS

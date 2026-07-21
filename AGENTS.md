@@ -2,7 +2,7 @@
 
 ## 项目结构与模块组织
 
-本仓库是基于 Vite、Vue 3、TypeScript 的前端小游戏项目。入口文件位于 `src/main.ts`，根组件为 `src/App.vue`。页面与功能组件放在 `src/components/`，其中 `home/`、`level/` 对应主要视图，`component/` 放通用游戏组件。路由在 `src/router/`，状态管理在 `src/store/`，国际化内容在 `src/lang/`。样式、数据与脚本资源分别位于 `src/assets/css/`、`src/assets/json/`、`src/assets/ts/`。静态资源放在 `public/`，包括 `audio/`、`font/`、`icons/background/` 和 `icons/stratagems/`。
+本仓库是基于 Vite、Vue 3、TypeScript 的前端小游戏项目。入口文件位于 `src/main.ts`，根组件为 `src/App.vue`。页面组件放在 `src/components/home/` 与 `src/components/level/`，通用组件放在 `src/components/common/`、`src/components/layout/` 和 `src/components/component/`。路由在 `src/router/`，Pinia 状态在 `src/store/`，组合式逻辑在 `src/hooks/`，常量在 `src/constants/`，纯函数在 `src/utils/`，共享类型在 `src/types/`。全局 Tailwind 与字体入口保留在 `src/assets/css/app.css`。静态资源放在 `public/`，包括 `audio/`、`font/`、`icons/background/` 和 `icons/stratagems/`。
 
 ## 构建、测试与开发命令
 
@@ -11,13 +11,15 @@
 - `pnpm install`：安装项目依赖。
 - `pnpm run dev`：启动 Vite 本地开发服务器。
 - `pnpm run build`：先运行 `vue-tsc -b` 类型检查，再执行生产构建。
+- `pnpm run lint`：运行 ESLint 检查。
+- `pnpm run lint:fix`：自动修复可安全处理的格式和规则问题。
 - `pnpm run preview`：本地预览已构建产物。
 
-当前仓库未配置自动化测试脚本；提交前至少运行 `pnpm run build` 验证类型与构建结果。
+当前仓库未配置自动化测试脚本；提交前至少运行 `pnpm run lint` 与 `pnpm run build` 验证规则、类型与构建结果。
 
 ## 编码风格与命名约定
 
-TypeScript 与 Vue 单文件组件应保持现有风格：使用 4 空格缩进，导入语句靠近文件顶部，优先使用 `@/` 别名引用 `src` 内模块。Vue 组件文件使用 PascalCase，例如 `Timer.vue`、`StratagemsLayer.vue`。普通工具脚本使用小写或下划线命名，例如 `round_time.ts`。JSON 数据文件应保持稳定字段结构，新增战备或关卡数据时同步检查相关渲染逻辑。
+项目使用 `@antfu/eslint-config` 与 ESLint Flat Config，提交前以 `pnpm run lint:fix` 的结果为准。Vue 组件文件使用 PascalCase，例如 `GamePage.vue`、`StratagemsLayer.vue`。hooks 使用 `use-*.ts` 命名，utils 和 constants 使用 kebab-case 或语义化小写文件名，例如 `round-time.ts`、`stratagem-random.ts`。导入优先使用 `@/` 别名，常量使用 `export const Xxx = {} as const`，不要新增 TypeScript `enum`。
 
 ## 测试指南
 

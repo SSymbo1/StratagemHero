@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { CSSProperties, Ref } from 'vue'
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { TimerLayer } from '@/assets/ts/global.ts'
+import { TimerLayer } from '@/constants/game.ts'
 
 const props = withDefaults(defineProps<{
   width?: string

@@ -1,5 +1,5 @@
-import type { Stratagem } from '@/assets/ts/round_stratagems.ts'
-import { Game } from '@/assets/ts/global.ts'
+import type { Stratagem } from '@/types/stratagem.ts'
+import { Game } from '@/constants/game.ts'
 
 export interface RoundTime {
   time: number

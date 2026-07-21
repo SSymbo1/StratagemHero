@@ -1,5 +1,5 @@
 import DisableDevtool from 'disable-devtool'
-import { MediaPlayer } from '@/assets/ts/media_player.ts'
+import { MediaPlayer } from '@/utils/audio-player.ts'
 
 export function initApplicationMode() {
   if (import.meta.env.MODE === 'production') {
