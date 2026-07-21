@@ -6,16 +6,18 @@
 
 ## 构建、测试与开发命令
 
-使用 pnpm 管理依赖，锁文件为 `pnpm-lock.yaml`。
+使用 pnpm 11.5.0 管理依赖，锁文件为 `pnpm-lock.yaml`。
 
-- `pnpm install`：安装项目依赖。
+- `pnpm install --frozen-lockfile`：严格按锁文件安装依赖。
 - `pnpm run dev`：启动 Vite 本地开发服务器。
 - `pnpm run build`：先运行 `vue-tsc -b` 类型检查，再执行生产构建。
+- `pnpm run typecheck`：单独运行 Vue 与 TypeScript 类型检查。
+- `pnpm run check`：依次运行 lint、类型检查和构建检查，与 PR CI 保持一致。
 - `pnpm run lint`：运行 ESLint 检查。
 - `pnpm run lint:fix`：自动修复可安全处理的格式和规则问题。
 - `pnpm run preview`：本地预览已构建产物。
 
-当前仓库未配置自动化测试脚本；提交前至少运行 `pnpm run lint` 与 `pnpm run build` 验证规则、类型与构建结果。
+当前仓库未配置自动化测试脚本；提交前至少运行 `pnpm run check` 验证规则、类型与构建结果。
 
 ## 编码风格与命名约定
 

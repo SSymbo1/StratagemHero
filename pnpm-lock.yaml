@@ -8,12 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@types/hammerjs':
-        specifier: ^2.0.46
-        version: 2.0.46
-      '@types/howler':
-        specifier: ^2.2.12
-        version: 2.2.13
       disable-devtool:
         specifier: ^0.3.8
         version: 0.3.9
@@ -42,6 +36,12 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.3.3
         version: 4.3.3(vite@6.4.3(@types/node@22.20.1)(jiti@2.7.0)(lightningcss@1.32.0)(yaml@2.9.0))
+      '@types/hammerjs':
+        specifier: ^2.0.46
+        version: 2.0.46
+      '@types/howler':
+        specifier: ^2.2.12
+        version: 2.2.13
       '@types/node':
         specifier: ^22.10.1
         version: 22.20.1
