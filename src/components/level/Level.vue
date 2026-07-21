@@ -1,17 +1,33 @@
 <script setup lang="ts">
-import {computed, CSSProperties, onMounted, onUnmounted, Ref, ref} from "vue";
-import label from "@/assets/json/game_label.json";
-import Timer from "@/components/component/Timer.vue";
-import StratagemsLayer from "@/components/component/StratagemsLayer.vue";
-import {randomStratagems, Stratagem} from "@/assets/ts/round_stratagems.ts";
-import router from "@/router";
-import ArrowLayer from "@/components/component/ArrowLayer.vue";
-import {useScore} from "@/store/base/score.ts";
-import {roundTimeCalculator} from "@/assets/ts/round_time.ts";
-import {Component, Game, TimerLayer} from "@/assets/ts/global.ts";
-import {Audio, MediaPlayer} from "@/assets/ts/media_player.ts";
-import Hammer from "hammerjs";
-import {Operation} from "@/assets/ts/operation.ts";
+import type { CSSProperties, Ref } from 'vue'
+import type { ResultItem } from '@/types/result.ts'
+import type { Stratagem } from '@/types/stratagem.ts'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
+import GameTitle from '@/components/common/GameTitle.vue'
+import ResultRevealList from '@/components/common/ResultRevealList.vue'
+import ArrowLayer from '@/components/component/ArrowLayer.vue'
+import StratagemsLayer from '@/components/component/StratagemsLayer.vue'
+import Timer from '@/components/component/Timer.vue'
+import GamePage from '@/components/layout/GamePage.vue'
+import ScorePanel from '@/components/level/ScorePanel.vue'
+import { Audio } from '@/constants/audio.ts'
+import { Component, Game, TimerLayer } from '@/constants/game.ts'
+import { GameLabelSetting } from '@/constants/labels.ts'
+import { useAudio } from '@/hooks/use-audio.ts'
+import { useGameInput } from '@/hooks/use-game-input.ts'
+import { useResultReveal } from '@/hooks/use-result-reveal.ts'
+import router from '@/router'
+import { useScore } from '@/store/base/score.ts'
+import { Operation } from '@/utils/operation-parser.ts'
+import { roundTimeCalculator } from '@/utils/round-time.ts'
+import { randomStratagems } from '@/utils/stratagem-random.ts'
+
+/**
+ * 创建回合结算展示数据，保持模板中的字段结构稳定。
+ */
+function createRoundResult(): ResultItem[] {
+  return GameLabelSetting.roundLabel.map(item => ({ ...item }))
+}
 
 const round: Ref<number> = ref(Game.ROUND)
 const score: Ref<number> = ref(Game.SCORE)
@@ -20,289 +36,237 @@ const perAddTime: Ref<number> = ref(Game.PER_TIME)
 const isRoundStart: Ref<boolean> = ref(true)
 const isRoundResult: Ref<boolean> = ref(false)
 const perfectRound: Ref<boolean> = ref(true)
-const timer: any = ref(null)
-const stratagemsLayer: any = ref(null)
-const stratagems: Ref<Array<Stratagem>> = ref([])
-const localStratagemName: Ref<string> = ref("")
-const localStratagemArrow: Ref<Array<number>> = ref([])
-const inputOperation: Ref<Array<number>> = ref([])
+const timer: Ref<InstanceType<typeof Timer> | null> = ref(null)
+const stratagemsLayer: Ref<InstanceType<typeof StratagemsLayer> | null> = ref(null)
+const stratagems: Ref<Stratagem[]> = ref([])
+const localStratagemName: Ref<string> = ref('')
+const localStratagemArrow: Ref<readonly number[]> = ref([])
+const inputOperation: Ref<number[]> = ref([])
 const perfectScore: Ref<number> = ref(0)
 const timeScore: Ref<number> = ref(0)
 const roundStratagemsCount: Ref<number> = ref(0)
 const roundScore: Ref<number> = ref(0)
-const roundResult: Ref<Array<RoundResult>> = ref(label.roundLabel)
-const currentIndex: Ref<number> = ref(-1)
-const showIndexes: Ref<Array<number>> = ref([])
-const intervalId: any = ref(null)
-const labelColor: Ref<string> = ref(Timer.SAFE_TIME)
+const roundResult: Ref<ResultItem[]> = ref(createRoundResult())
+const labelColor: Ref<string> = ref(TimerLayer.SAFE_TIME)
 const remainTime: Ref<boolean> = ref(true)
-const backgroundHowl: Ref<Howl | undefined> = ref(undefined)
-const roundCompleteHowl: Ref<MediaPlayer | undefined> = ref(undefined)
-const hammerArea: Ref<HTMLElement | null> = ref(null)
-const hammerInstance: Ref<HammerManager | null> = ref(null)
 
-/**
- * @param label 标签
- * @param score 分数
- */
-interface RoundResult {
-  label: string
-  score: number
+const {
+  playEffect,
+  playBackground,
+  stopBackground,
+  playRoundComplete,
+  stopRoundComplete,
+} = useAudio()
+const { showIndexes, resetReveal, startReveal, stopReveal } = useResultReveal(Component.LABEL_SHOW)
+const { targetRef, startListening, stopListening } = useGameInput(checkInput)
+
+const dynamicLabelColor = computed(() => {
+  return {
+    background: labelColor.value,
+  } as CSSProperties
+})
+
+// 统一处理键盘与手势输入，只在有效操作时累计序列。
+function checkInput(event: KeyboardEvent | HammerInput) {
+  const operation = new Operation(event)
+
+  if (operation.checkOPEffective()) {
+    playEffect(Audio.PRESS_KEY, 1)
+    inputOperation.value.push(operation.transformOP2Direction())
+  }
 }
 
-/**
- * 每回合开始前进行数据处理
- */
-const readyForRoundBegin = () => {
-  new MediaPlayer(false, 0.5).audioPlay(Audio.GET_READY).play()
+function readyForRoundBegin() {
+  // 新回合开始前先重置状态，再延迟开启输入与背景音乐。
+  playEffect(Audio.GET_READY)
   perfectRound.value = true
   isRoundResult.value = false
   isRoundStart.value = true
   round.value++
   stratagems.value = randomStratagems(round.value)
-  let roundTime = roundTimeCalculator(stratagems.value, round.value)
+
+  const roundTime = roundTimeCalculator(stratagems.value, round.value)
   time.value = roundTime.time
   perAddTime.value = roundTime.plus
   roundStratagemsCount.value = stratagems.value.length
   inputOperation.value = []
   localStratagemName.value = stratagems.value[0].name
   localStratagemArrow.value = stratagems.value[0].operation
+
   setTimeout(() => {
-    if (hammerArea.value) {
-      hammerInstance.value = new Hammer(hammerArea.value)
-      hammerInstance.value.get("swipe").set({direction: Hammer.DIRECTION_ALL})
-      hammerInstance.value.on("swipe", checkInput)
-    }
-    window.addEventListener("keydown", checkInput)
+    startListening()
     isRoundStart.value = false
-    if (backgroundHowl.value === undefined) {
-      backgroundHowl.value = new MediaPlayer(true, 0.5).audioPlay(Audio.BACKGROUND)
-      backgroundHowl.value.play()
-    } else {
-      backgroundHowl.value.play()
-    }
+    playBackground()
   }, Component.READY_WAIT)
 }
 
-/**
- * 回合因倒计时终止而结束
- */
-const timeUp = () => {
-  if (backgroundHowl.value !== undefined) {
-    backgroundHowl.value.stop()
-  }
-  let useScoreStore = useScore()
-  useScoreStore.setScore(null, null, score.value, round.value)
-  router.replace("/rank")
+function timeUp() {
+  // 时间耗尽时写入本局成绩并跳转到排行榜。
+  stopBackground()
+
+  const useScoreStore = useScore()
+  useScoreStore.setLastResult(score.value, round.value)
+  router.replace('/rank')
 }
 
-/**
- * 回合胜利进行数据处理
- */
-const roundStratagemsRunOut = () => {
-  if (backgroundHowl.value !== undefined) {
-    backgroundHowl.value.stop()
-  }
-  window.removeEventListener("keydown", checkInput)
-  hammerInstance.value?.off("swipe", checkInput)
-  let remainTime: number = timer.value.getRemainTime()
+function roundStratagemsRunOut() {
+  // 当前回合所有战备完成后，计算奖励并展示结算列表。
+  stopBackground()
+  stopListening()
+
+  const remainTimeValue = timer.value?.getRemainTime() ?? 0
+
   if (round.value <= Game.DIFFICULT_ROUND && perfectRound.value) {
     perfectScore.value = Game.PERFECT_SCORE
-  } else if (round.value > Game.DIFFICULT_ROUND && perfectRound.value) {
+  }
+  else if (round.value > Game.DIFFICULT_ROUND && perfectRound.value) {
     perfectScore.value = Game.PERFECT_SCORE + round.value * 2
-  } else if (!perfectRound.value) {
+  }
+  else {
     perfectScore.value = 0
   }
-  if (round.value <= Game.DIFFICULT_ROUND) {
-    roundScore.value = Game.ROUND_SCORE
-  } else {
-    roundScore.value = Game.DIFFICULT_SCORE
-  }
-  timeScore.value = remainTime * roundStratagemsCount.value
-  score.value = score.value + perfectScore.value + timeScore.value + roundScore.value
+
+  roundScore.value = round.value <= Game.DIFFICULT_ROUND
+    ? Game.ROUND_SCORE
+    : Game.DIFFICULT_SCORE
+  timeScore.value = remainTimeValue * roundStratagemsCount.value
+  score.value += perfectScore.value + timeScore.value + roundScore.value
+
   roundResult.value[0].score = roundScore.value
   roundResult.value[1].score = timeScore.value
   roundResult.value[2].score = perfectScore.value
   roundResult.value[3].score = score.value
   isRoundResult.value = true
-  currentIndex.value = -1
-  showIndexes.value = []
-  intervalId.value = setInterval(() => {
-    if (currentIndex.value === -1) {
-      if (roundCompleteHowl.value === undefined) {
-        roundCompleteHowl.value = new MediaPlayer(false, 0.5)
-        roundCompleteHowl.value.roundCompleteMusic().play()
-      } else {
-        roundCompleteHowl.value.roundCompleteMusic().play()
-      }
-    }
-    if (currentIndex.value < roundResult.value.length - 1) {
-      currentIndex.value++
-      showIndexes.value.push(currentIndex.value)
-    } else {
-      clearInterval(intervalId.value)
-    }
-  }, Component.LABEL_SHOW)
+
+  startReveal(roundResult.value.length, {
+    onFirstReveal: playRoundComplete,
+  })
+
   setTimeout(() => {
     readyForRoundBegin()
   }, Component.ROUND_RESULT_WAIT)
 }
 
-/**
- * 键盘输入检查
- * @param event 键盘事件或触控事件
- */
-const checkInput = (event: KeyboardEvent | HammerInput) => {
-  const operation = new Operation(event)
-  if (operation.checkOPEffective()) {
-    new MediaPlayer(false, 1).audioPlay(Audio.PRESS_KEY).play()
-    inputOperation.value.push(operation.transformOP2Direction())
-  }
-}
-
-/**
- * 获取当前战略配备
- * @param stratagem 战略配备
- */
-const currentStratagem = (stratagem: Stratagem) => {
+function currentStratagem(stratagem: Stratagem) {
+  // 始终把当前展示的战备同步给模板与箭头输入层。
   localStratagemName.value = stratagem.name
   localStratagemArrow.value = stratagem.operation
 }
 
-/**
- * 战略配备指令输入成功
- */
-const arrowCheckSuccess = () => {
-  timer.value.addTime()
-  stratagemsLayer.value.removeFirstStratagem()
+function arrowCheckSuccess() {
+  // 成功输入后补时、加分并移除已完成战备。
+  timer.value?.addTime()
+  stratagemsLayer.value?.removeFirstStratagem()
   score.value += Game.PER_SCORE
   inputOperation.value = []
-  new MediaPlayer(false, 0.5).audioPlay(Audio.SUCCESS).play()
+  playEffect(Audio.SUCCESS)
 }
 
-/**
- * 战略配备指令输入错误
- */
-const arrowCheckError = () => {
+function arrowCheckError() {
+  // 错误输入仅清空当前序列，并终止完美回合判定。
   inputOperation.value = []
   perfectRound.value = false
 }
 
-/**
- * 当前战略配备组件信号传递
- * @param percent 当前战略配备指令完成百分比
- */
-const deliverCommandPercent = (percent: number) => {
-  stratagemsLayer.value.stratagemsLayerFilter(percent)
+function deliverCommandPercent(percent: number) {
+  // 将输入进度同步给战备列表滤镜。
+  stratagemsLayer.value?.stratagemsLayerFilter(percent)
 }
 
-/**
- * 回合时间将要耗尽
- */
-const timeNearlyRunOut = () => {
+function timeNearlyRunOut() {
+  // 进入危险时间后，计时条和战备边框同时变色。
   labelColor.value = TimerLayer.DANGER_TIME
   remainTime.value = false
-  dynamicLabelColor.value
 }
 
-/**
- * 回合时间充裕
- */
-const ampleTime = () => {
+function ampleTime() {
+  // 回到安全区时恢复默认颜色。
   labelColor.value = TimerLayer.SAFE_TIME
   remainTime.value = true
-  dynamicLabelColor.value
 }
 
-/**
- * 动态渲染label颜色
- * @return {CSSProperties} label的css样式表属性
- */
-const dynamicLabelColor = computed(() => {
-  return {
-    background: labelColor.value
-  } as CSSProperties
-})
-
 onMounted(() => {
+  resetReveal()
   readyForRoundBegin()
 })
 
 onUnmounted(() => {
-  window.removeEventListener("keydown", checkInput)
-  hammerInstance.value?.off("swipe", checkInput)
-  clearInterval(intervalId.value)
-  backgroundHowl.value?.stop()
-  roundCompleteHowl.value?.roundCompleteMusic().stop()
+  stopListening()
+  stopReveal()
+  stopBackground()
+  stopRoundComplete()
 })
 </script>
 
 <template>
-  <div class="game-container" ref="hammerArea">
-    <div class="round-layer" v-if="isRoundStart && !isRoundResult">
-      <div class="round-layer-title">{{ $t("round.title") }}</div>
-      <div class="round-layer-label">
-        <div class="round-layer-label-title">{{ $t("round.subtitle") }}</div>
-        <div class="round-layer-label-index">{{ round }}</div>
-      </div>
-    </div>
-    <div class="game-layer" v-if="!isRoundStart && !isRoundResult">
-      <div class="game-side">
-        <div class="game-side-label">{{ $t("game.round") }}</div>
-        <div class="game-side-number">{{ round }}</div>
-      </div>
-      <div class="game-main">
-        <div class="stratagems">
-          <div class="stratagems-pointer">
-            <StratagemsLayer
+  <GamePage>
+    <div ref="targetRef" class="h-full w-full">
+      <GameTitle
+        v-if="isRoundStart && !isRoundResult"
+        variant="ready"
+        :title="$t('round.title')"
+        :subtitle="$t('round.subtitle')"
+        :meta="round"
+      />
+
+      <div
+        v-if="!isRoundStart && !isRoundResult"
+        class="flex h-full flex-row"
+      >
+        <ScorePanel :label="$t('game.round')" :value="round" />
+
+        <div class="flex w-1/2 flex-col items-center justify-center gap-[3vh]">
+          <div class="flex h-[27vh] w-full flex-col gap-[3vh] justify-self-center">
+            <div class="m-0 flex h-[22vh] w-full flex-row justify-start gap-0 p-0">
+              <StratagemsLayer
                 ref="stratagemsLayer"
                 :stratagems="stratagems"
                 :ample-time="remainTime"
                 @clear-up="roundStratagemsRunOut"
-                @now-stratagem="currentStratagem">
-            </StratagemsLayer>
+                @now-stratagem="currentStratagem"
+              />
+            </div>
+            <div
+              class="font-game flex h-[11vh] w-full flex-col items-center justify-center text-2xl leading-[6.5vh] md:text-4xl"
+              :style="dynamicLabelColor"
+            >
+              <span>{{ $t(`stratagems.${localStratagemName}`) }}</span>
+            </div>
           </div>
-          <div class="stratagems-label" :style="dynamicLabelColor">
-            <span>{{ $t(`stratagems.${localStratagemName}`) }}</span>
-          </div>
-        </div>
-        <div class="arrow-layer">
-          <ArrowLayer
+
+          <div class="mt-[1.1vh] h-[13vh] w-full gap-0 p-0">
+            <ArrowLayer
               :arrow="localStratagemArrow"
               :operation="inputOperation"
               @percent="deliverCommandPercent"
               @success="arrowCheckSuccess"
-              @error="arrowCheckError">
-          </ArrowLayer>
-        </div>
-        <Timer
+              @error="arrowCheckError"
+            />
+          </div>
+
+          <Timer
+            ref="timer"
             :time="time"
             :per-plus="perAddTime"
-            @timeUp="timeUp"
+            @time-up="timeUp"
             @remain-many="ampleTime"
             @nearly-over="timeNearlyRunOut"
-            ref="timer">
-        </Timer>
-      </div>
-      <div class="game-side">
-        <div class="game-side-number">{{ score }}</div>
-        <div class="game-side-label">{{ $t("game.score") }}</div>
-      </div>
-    </div>
-    <div class="round-result" v-if="!isRoundStart && isRoundResult">
-      <div class="round-result-container">
-        <div class="round-result-layer"
-             v-for="(res,index) in roundResult"
-             :key="index"
-             v-show="showIndexes.includes(index)">
-          <span class="result-item-label">{{ $t(`roundLabel.${res.label}`) }}</span>
-          <span class="result-score-label">{{ res.score }}</span>
+          />
         </div>
+
+        <ScorePanel :label="$t('game.score')" :value="score" value-first />
+      </div>
+
+      <div
+        v-if="!isRoundStart && isRoundResult"
+        class="flex h-full flex-col items-center justify-center"
+      >
+        <ResultRevealList
+          :items="roundResult"
+          :show-indexes="showIndexes"
+          label-prefix="roundLabel"
+        />
       </div>
     </div>
-  </div>
+  </GamePage>
 </template>
-
-<style scoped>
-@import "@/assets/css/level.css";
-</style>

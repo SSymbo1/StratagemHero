@@ -1,0 +1,34 @@
+/**
+ * 键盘、滑动与手柄输入的映射配置。
+ */
+export const OperationSetting = {
+  keyboard: {
+    up: [
+      'ArrowUp',
+      'W',
+      'w',
+    ],
+    down: [
+      'ArrowDown',
+      'S',
+      's',
+    ],
+    left: [
+      'ArrowLeft',
+      'A',
+      'a',
+    ],
+    right: [
+      'ArrowRight',
+      'D',
+      'd',
+    ],
+  },
+  swipe: {
+    up: 8,
+    down: 16,
+    left: 2,
+    right: 4,
+  },
+  controller: {},
+} as const

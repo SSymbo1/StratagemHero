@@ -1,55 +1,128 @@
-name: StratagemHero
+name: Production Release
 
 on:
-  # 仅在推送或PR到默认分支时运行。
-  push:
-    branches: [ 'master' ]
   pull_request:
-    branches: [ 'master' ]
+    branches:
+      - master
+    types:
+      - closed
 
-  # 这个选项可以使你手动在 Action tab 页面触发工作流
-  workflow_dispatch:
-
-# 设置 GITHUB_TOKEN 的权限，以允许部署到 GitHub Pages。
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# 允许一个并发的部署
-concurrency:
-  group: 'pages'
-  cancel-in-progress: true
+permissions: {}
 
 jobs:
-  # 单次部署的工作描述
-  deploy:
-    environment:
-      name: CI/CD
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
+    name: Build Release Artifacts
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
     steps:
-      - name: Checkout branch
-        uses: actions/checkout@v4
+      - name: Checkout merge commit
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+
       - name: Set up pnpm
-        uses: pnpm/action-setup@v2
-        with: 
-          version: 8.15.4
-      - name: Set up Node
-        uses: actions/setup-node@v4
+        uses: pnpm/action-setup@v6
         with:
-          node-version: 18
-          cache: 'pnpm'
+          package_json_file: package.json
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
       - name: Install dependencies
-        run: pnpm install
-      - name: Build
+        run: pnpm install --frozen-lockfile
+
+      - name: Build application
         run: pnpm run build
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+
+      - name: Generate release notes
+        run: pnpm run release:notes -- release-notes.md
+
+      - name: Package release artifact
+        env:
+          RELEASE_ARCHIVE: StratagemHero-pr-${{ github.event.pull_request.number }}.zip
+        run: zip -r "$RELEASE_ARCHIVE" dist nginx.conf
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v6
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
         with:
-          path: './dist'
-      - name: Deploy to GitHub Pages
+          path: dist
+
+      - name: Upload release intermediates
+        uses: actions/upload-artifact@v7
+        with:
+          name: release-package
+          path: |
+            StratagemHero-pr-${{ github.event.pull_request.number }}.zip
+            nginx.conf
+            release-notes.md
+          if-no-files-found: error
+          retention-days: 1
+
+  deploy:
+    name: Deploy GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    concurrency:
+      group: github-pages
+      cancel-in-progress: true
+    steps:
+      - name: Deploy Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
+
+  release:
+    name: Create GitHub Release
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download release artifacts
+        uses: actions/download-artifact@v5
+        with:
+          name: release-package
+          path: release-package
+
+      - name: Create or update release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_ARCHIVE: release-package/StratagemHero-pr-${{ github.event.pull_request.number }}.zip
+          NGINX_CONFIG: release-package/nginx.conf
+          RELEASE_NOTES: release-package/release-notes.md
+          RELEASE_TAG: pr-${{ github.event.pull_request.number }}
+          RELEASE_TARGET: ${{ github.event.pull_request.merge_commit_sha }}
+          RELEASE_TITLE: >-
+            PR #${{ github.event.pull_request.number }}: ${{ github.event.pull_request.title }}
+        run: |
+          if gh release view "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release edit "$RELEASE_TAG" \
+              --repo "$GITHUB_REPOSITORY" \
+              --title "$RELEASE_TITLE" \
+              --notes-file "$RELEASE_NOTES"
+            gh release upload "$RELEASE_TAG" "$RELEASE_ARCHIVE" "$NGINX_CONFIG" \
+              --repo "$GITHUB_REPOSITORY" \
+              --clobber
+          else
+            gh release create "$RELEASE_TAG" "$RELEASE_ARCHIVE" "$NGINX_CONFIG" \
+              --repo "$GITHUB_REPOSITORY" \
+              --target "$RELEASE_TARGET" \
+              --title "$RELEASE_TITLE" \
+              --notes-file "$RELEASE_NOTES" \
+              --latest
+          fi

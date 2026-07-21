@@ -1,47 +1,35 @@
 <script setup lang="ts">
-import {onMounted, onUnmounted, Ref, ref} from "vue";
-import {operationSoundCache} from "@/assets/ts/application_init.ts";
-import router from "@/router/index.ts";
-import Hammer from "hammerjs";
-import {Operation} from "@/assets/ts/operation.ts";
+import { onMounted } from 'vue'
+import GameTitle from '@/components/common/GameTitle.vue'
+import GamePage from '@/components/layout/GamePage.vue'
+import { useAudio } from '@/hooks/use-audio.ts'
+import { useGameInput } from '@/hooks/use-game-input.ts'
+import router from '@/router/index.ts'
+import { Operation } from '@/utils/operation-parser.ts'
 
-const hammerArea: Ref<HTMLElement | null> = ref(null)
-const hammerInstance: Ref<HammerManager | null> = ref(null)
+const { preloadAudio } = useAudio()
 
-/**
- * 游戏开始
- * @param event 键盘事件或触控事件
- */
-const startGame = async (event: KeyboardEvent | HammerInput) => {
-  if (new Operation(event).checkOPEffective() && await operationSoundCache()) {
-    await router.replace("/level")
+// 仅接受有效输入，预加载成功后进入关卡页。
+async function startGame(event: KeyboardEvent | HammerInput) {
+  if (new Operation(event).checkOPEffective() && await preloadAudio()) {
+    await router.replace('/level')
   }
 }
 
-onMounted(() => {
-  if (hammerArea.value) {
-    hammerInstance.value = new Hammer(hammerArea.value)
-    hammerInstance.value.get("swipe").set({direction: Hammer.DIRECTION_ALL})
-    hammerInstance.value.on("swipe", startGame)
-  }
-  window.addEventListener("keydown", startGame)
-})
+const { targetRef, startListening } = useGameInput(startGame)
 
-onUnmounted(() => {
-  window.removeEventListener("keydown", startGame)
-  hammerInstance.value?.off("swipe", startGame)
+onMounted(() => {
+  startListening()
 })
 </script>
 
 <template>
-  <div class="home-container" ref="hammerArea">
-    <div class="game-container">
-      <div class="title">{{ $t("home.title") }}</div>
-      <div class="subtitle">{{ $t("home.subtitle") }}</div>
+  <GamePage>
+    <div ref="targetRef" class="h-full w-full">
+      <GameTitle
+        :title="$t('home.title')"
+        :subtitle="$t('home.subtitle')"
+      />
     </div>
-  </div>
+  </GamePage>
 </template>
-
-<style scoped>
-@import "@/assets/css/home.css";
-</style>
