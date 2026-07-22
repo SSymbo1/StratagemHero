@@ -41,9 +41,6 @@ jobs:
       - name: Build application
         run: pnpm run build
 
-      - name: Generate release notes
-        run: pnpm run release:notes -- release-notes.md
-
       - name: Package release artifact
         env:
           RELEASE_ARCHIVE: StratagemHero-pr-${{ github.event.pull_request.number }}.zip
@@ -64,7 +61,6 @@ jobs:
           path: |
             StratagemHero-pr-${{ github.event.pull_request.number }}.zip
             nginx.conf
-            release-notes.md
           if-no-files-found: error
           retention-days: 1
 
@@ -99,12 +95,43 @@ jobs:
           name: release-package
           path: release-package
 
+      - name: Generate release notes
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          PR_MERGED_AT: ${{ github.event.pull_request.merged_at }}
+          PR_MERGE_COMMIT: ${{ github.event.pull_request.merge_commit_sha }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: |
+          node --input-type=module <<'EOF'
+          import { writeFile } from 'node:fs/promises'
+          const description = (process.env.PR_BODY || '').trim() || '该 Pull Request 未提供变更说明。'
+          const releaseNotes = [
+            '## 变更说明',
+            '',
+            description,
+            '',
+            '## 合并信息',
+            '',
+            `- Pull Request：[#${process.env.PR_NUMBER}](${process.env.PR_URL})`,
+            `- 标题：${process.env.PR_TITLE}`,
+            `- 作者：@${process.env.PR_AUTHOR}`,
+            `- 合并时间：${process.env.PR_MERGED_AT || '未知'}`,
+            `- 合并提交：\`${process.env.PR_MERGE_COMMIT || '未知'}\``,
+            '',
+          ].join('\n')
+
+          await writeFile('release-notes.md', releaseNotes, 'utf8')
+          EOF
+
       - name: Create or update release
         env:
           GH_TOKEN: ${{ github.token }}
           RELEASE_ARCHIVE: release-package/StratagemHero-pr-${{ github.event.pull_request.number }}.zip
           NGINX_CONFIG: release-package/nginx.conf
-          RELEASE_NOTES: release-package/release-notes.md
+          RELEASE_NOTES: release-notes.md
           RELEASE_TAG: pr-${{ github.event.pull_request.number }}
           RELEASE_TARGET: ${{ github.event.pull_request.merge_commit_sha }}
           RELEASE_TITLE: >-
